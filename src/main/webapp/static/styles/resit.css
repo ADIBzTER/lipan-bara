@@ -1,0 +1,107 @@
+body {
+  margin: auto 0;
+  background-color: #e8f1f8;
+  color: #535353;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#app-bar {
+  position: fixed;
+  top: 0;
+  display: -ms-grid;
+  display: grid;
+  height: 80px;
+  width: 100%;
+  background-color: #457b9d;
+  -ms-grid-columns: 300px auto;
+      grid-template-columns: 300px auto;
+  color: whitesmoke;
+}
+
+#app-bar #appbar-left {
+  padding-left: 15px;
+}
+
+#app-bar #appbar-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 50px;
+}
+
+#app-bar #appbar-right h3 {
+  padding: 0 15px 0 10px;
+}
+
+#app-bar #appbar-right #logout {
+  padding: 0 15px;
+}
+
+#app-bar img {
+  width: 40px;
+}
+
+#center {
+  padding-top: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 30px 0;
+}
+
+#center .resit {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: white;
+  border: solid 1px black;
+  padding: 10px;
+}
+
+#center .resit .resit-top {
+  height: 50px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#center .resit table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#center .resit table th {
+  background-color: #457b9d;
+  border: 1px solid black;
+  color: white;
+  padding: 10px;
+}
+
+#center .resit table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+/*# sourceMappingURL=resit.css.map */

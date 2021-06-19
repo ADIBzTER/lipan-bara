@@ -1,0 +1,190 @@
+body {
+  margin: auto 0;
+  background-color: #e8f1f8;
+  color: #535353;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#app-bar {
+  position: fixed;
+  top: 0;
+  display: -ms-grid;
+  display: grid;
+  height: 80px;
+  width: 100%;
+  background-color: #457b9d;
+  -ms-grid-columns: 300px auto;
+      grid-template-columns: 300px auto;
+  color: whitesmoke;
+}
+
+#app-bar #appbar-left {
+  padding-left: 15px;
+}
+
+#app-bar #appbar-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 50px;
+}
+
+#app-bar #appbar-right h3 {
+  padding: 0 15px 0 10px;
+}
+
+#app-bar #appbar-right #logout {
+  padding: 0 15px;
+}
+
+#app-bar img {
+  width: 40px;
+}
+
+#center {
+  padding-top: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 30px 0;
+}
+
+#center .products-table {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-rows: 200px;
+  row-gap: 10px;
+  padding: 10px;
+  width: 85%;
+  height: 100%;
+  border: solid #e6e6e6;
+  border-radius: 10px;
+  box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+}
+
+#center .products-table .product {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 200px auto;
+      grid-template-columns: 200px auto;
+  grid-auto-rows: 200px;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  border: solid #e6e6e6;
+  border-radius: 25px;
+}
+
+#center .products-table .product img {
+  width: 100%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+#center .products-table .product .product-desc {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  -ms-grid-rows: 15% 45% 15% 20%;
+      grid-template-rows: 15% 45% 15% 20%;
+}
+
+#center .products-table .product .product-desc .product-name {
+  font-weight: bold;
+}
+
+#center .products-table .product .product-desc .product-price {
+  font-weight: bold;
+}
+
+#center .products-table .product .product-desc button {
+  background-color: #ff5a5f;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  font-weight: bold;
+}
+
+#center .products-table .product .product-desc button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+#cart-footer {
+  position: fixed;
+  bottom: 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 80% auto;
+      grid-template-columns: 80% auto;
+  width: 100%;
+  height: 120px;
+  background-color: white;
+  box-shadow: 0px -11px 5px -3px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0px -11px 5px -3px rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0px -11px 5px -3px rgba(0, 0, 0, 0.12);
+}
+
+#cart-footer button {
+  background-color: #95d5b2;
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  font-weight: bold;
+}
+
+#cart-footer button:hover {
+  background-color: white;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+#cart-footer .grid-item {
+  color: black;
+  padding: 10px;
+  font-weight: 600;
+}
+
+#cart-footer .grid-item .pay-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+/*# sourceMappingURL=cart.css.map */

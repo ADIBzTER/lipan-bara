@@ -1,0 +1,109 @@
+$bg-color: rgb(232, 241, 248);
+$text-color: rgb(83, 83, 83);
+$primary-color: #457b9d;
+$secondary-color: #a8dadc;
+$border-color: rgb(230, 230, 230);
+
+body {
+  margin: auto 0;
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  transition: 0.5s;
+}
+
+#app-bar {
+  // Make sure AppBar stay at top
+  position: fixed;
+  top: 0;
+
+  display: grid;
+  height: 80px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: $primary-color;
+  grid-template-columns: 180px auto 150px;
+  grid-template-rows: auto;
+  align-items: center;
+  color: whitesmoke;
+
+  a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  #search-bar {
+    height: 35px;
+    width: 90%;
+    border: solid $border-color;
+    border-radius: 10px;
+  }
+}
+
+#center {
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+
+  .products-table {
+    display: grid;
+    grid-auto-rows: 200px;
+    row-gap: 10px;
+    padding: 10px;
+    width: 85%;
+    height: 100%;
+    border: solid $border-color;
+    border-radius: 10px;
+    box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.25);
+
+    .product {
+      display: grid;
+      grid-template-columns: 200px auto;
+      grid-auto-rows: 200px;
+      column-gap: 20px;
+      border: solid $border-color;
+      border-radius: 25px;
+
+      img {
+        width: 100%;
+        align-self: center;
+      }
+
+      .product-desc {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 15% 45% 15% 20%;
+
+        .product-name {
+          font-weight: bold;
+        }
+
+        .product-desc {
+        }
+
+        .product-price {
+          font-weight: bold;
+        }
+
+        button {
+          border-radius: 5px;
+          height: 40px;
+          width: 120px;
+          font-weight: bold;
+
+          &:hover {
+            background-color: $secondary-color;
+            cursor: pointer;
+            transition: 0.2s;
+          }
+        }
+      }
+    }
+  }
+}
