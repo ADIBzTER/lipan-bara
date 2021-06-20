@@ -30,11 +30,11 @@
 			<c:forEach items="${productList}" var="product">
 
 				<div class="product">
-					<img src="images/ssd.jpeg" alt="product-image">
+					<img src="${product.prodImageLocation}" alt="product-image">
 					<div class="product-desc">
-						<span class="product-name">${product.name}</span> <span
-							class="product-description">${product.description} </span> <span
-							class="product-price">RM${product.price}</span> <span
+						<span class="product-name">${product.prodName}</span> <span
+							class="product-description">${product.prodDescription} </span> <span
+							class="product-price">RM${product.prodPrice}</span> <span
 							class="product-buttons">
 							<button>Buy</button>
 						</span>
