@@ -4,7 +4,22 @@ public class CustomerBean {
 	private String password;
 	private String address;
 	private String phone;
+	private String name;
 	public boolean valid;
+
+	public CustomerBean() {
+		// PASS
+	}
+
+	public CustomerBean(int id, String username, String password, String address, String phone, boolean valid) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.address = address;
+		this.phone = phone;
+		this.valid = valid;
+	}
 
 	public int getId() {
 		return id;
@@ -44,6 +59,14 @@ public class CustomerBean {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public boolean isValid() {

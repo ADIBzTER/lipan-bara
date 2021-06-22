@@ -7,37 +7,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/adminLogin")
+public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("admin-login.jsp");
 		rd.forward(req, res);
 	}
 
 	// Login attempt
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, java.io.IOException {
 		try {
-			CustomerBean customer = new CustomerBean();
-			customer.setUsername(req.getParameter("username"));
-			customer.setPassword(req.getParameter("password"));
-			customer = CustomerDAO.login(customer);
+			AdminBean admin = new AdminBean();
+			admin.setUsername(req.getParameter("username"));
+			admin.setPassword(req.getParameter("password"));
+			admin = AdminDAO.login(admin);
 
-			if (customer.isValid()) {
+			if (admin.isValid()) {
 				// Logged-in page
 				HttpSession session = req.getSession(true);
-				session.setAttribute("id", customer.getId());
-				session.setAttribute("username", customer.getUsername());
-				session.setAttribute("address", customer.getAddress());
-				session.setAttribute("phone", customer.getPhone());
-				session.setAttribute("name", customer.getName());
+				session.setAttribute("id", admin.getId());
+				session.setAttribute("username", admin.getUsername());
 
-				res.sendRedirect("home");
+				RequestDispatcher rd = req.getRequestDispatcher("product");
+				rd.forward(req, res);
 			} else {
 				// Error page
-				RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("admin-login.jsp");
 				req.setAttribute("errorMessage", "Invalid Credentials");
 				rd.forward(req, res);
 			}

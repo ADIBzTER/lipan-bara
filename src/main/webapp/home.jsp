@@ -14,12 +14,25 @@
 <body>
 	<div id="app-bar">
 		<div id="main-logo">
-			<h1>Lipan Bara</h1>
+			<h1>
+				<a href="home">Lipan Bara</a>
+			</h1>
 		</div>
 		<input type="text" name="search" id="search-bar"
 			placeholder="Lampu Kedai Tomyam">
 		<div id="sigin-signup">
-			<a href="sign-up.jsp">Sign Up</a> | <a href="login.jsp">Login</a>
+
+			<c:choose>
+				<c:when test="${id != null}">
+					<h4>${ username }
+						| <a href="logout">Logout</a>
+					</h4>
+				</c:when>
+				<c:otherwise>
+					<a href="register">Sign Up</a> | <a href="login">Login</a>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</div>
 
@@ -28,24 +41,28 @@
 
 			<%-- Loop all products here --%>
 			<c:forEach items="${productList}" var="product">
-
-				<div class="product">
-					<img src="${product.prodImageLocation}" alt="product-image">
-					<div class="product-desc">
-						<span class="product-name">${product.prodName}</span> <span
-							class="product-description">${product.prodDescription} </span> <span
-							class="product-price">RM${product.prodPrice}</span> <span
-							class="product-buttons">
-							<button>Buy</button>
-						</span>
+				<form action="cart" method="POST">
+					<div class="product">
+						<input type="hidden" id="product-id" name="productId"
+							value="${ product.id }"> <img
+							src="${product.imageLocation}" alt="product-image">
+						<div class="product-desc">
+							<span class="product-name">${product.name}</span> <span
+								class="product-description">${product.description} </span> <span
+								class="product-price">RM${product.price}</span> <span
+								class="product-buttons">
+								<button>Buy</button>
+								<button id="add-cart">Add to Cart</button>
+							</span>
+						</div>
 					</div>
-				</div>
-
+				</form>
 			</c:forEach>
 
 		</div>
 
 	</div>
+	<script type="text/javascript" src="./static/scripts/home.js"></script>
 </body>
 
 </html>

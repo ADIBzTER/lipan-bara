@@ -1,18 +1,19 @@
 import java.sql.*;
 import java.util.*;
 
-public class ProductDAO {
+public class PurchaseDAO {
 	static Connection connection = null;
 	static ResultSet resultSet = null;
 
-	public static List<ProductBean> getAll() {
-		// preparing some objects/variable
-		List<ProductBean> productList = new LinkedList<>();
-		String sql = "SELECT * FROM products p JOIN suppliers s ON (p.supp_id = s.supp_id)";
+	public static List<PurchaseBean> getAll() {
 
+		List<PurchaseBean> purchaseList = new LinkedList<>();
+		String sql = "SELECT * FROM purchases pur " + "JOIN customers c " + "ON pur.cust_id = c.cust_id "
+				+ "JOIN products pro " + "ON pur.prod_id = pro.prod_id";
 		Statement statement = null;
+
 		// Trace process
-		System.out.println("in ProductBean.getAll");
+		System.out.println("in PurchaseDAO.getAll");
 
 		try {
 			// connect to DB
@@ -22,23 +23,19 @@ public class ProductDAO {
 
 			// Iterate over the ResultSet, add row into object and object into list
 			while (resultSet.next()) {
-				ProductBean product = new ProductBean();
+				PurchaseBean purchase = new PurchaseBean();
 
-				product.setId(resultSet.getInt(1));
-				product.setName(resultSet.getString(2));
-				product.setQuantity(resultSet.getInt(3));
-				product.setPrice(resultSet.getDouble(4));
-				product.setDescription(resultSet.getString(5));
-				product.setImageLocation(resultSet.getString(6));
-				product.setSuppId(resultSet.getInt(7));
-				product.setAdId(resultSet.getInt(8));
+				purchase.setId(resultSet.getInt("purc_id"));
+				purchase.setDate(resultSet.getString("purc_date"));
+				purchase.setShipping(resultSet.getString("purc_shipping"));
+				purchase.setQuantity(resultSet.getInt("purc_quantity"));
 
-				product.setSupplier(new SupplierBean(resultSet.getInt(9), resultSet.getString(10),
-						resultSet.getString(11), resultSet.getString(12)));
+//				purchase.setSupplier(new SupplierBean(resultSet.getInt(9), resultSet.getString(10),
+//						resultSet.getString(11), resultSet.getString(12)));
 
-				productList.add(product);
+				purchaseList.add(purchase);
 
-				System.out.println(productList);
+				System.out.println(purchaseList);
 			}
 		} catch (Exception ex) {
 			System.out.println("Log In failed: An Exception has occurred! " + ex);
@@ -66,7 +63,7 @@ public class ProductDAO {
 				connection = null;
 			}
 		}
-		return productList;
+		return purchaseList;
 	}
 
 	public static ProductBean getOne(int productId) {

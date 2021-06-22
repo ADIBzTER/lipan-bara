@@ -7,7 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Lipan Bara Tech | Login</title>
+<title>Lipan Bara Tech | Admin Login</title>
 <link rel="stylesheet" href="./static/styles/login.css">
 <link rel="stylesheet" href="./static/styles/bootstrap.min.css">
 </head>
@@ -23,9 +23,9 @@
 		</div>
 		<div id="outer">
 			<div id="inner">
-				<h2>Login</h2>
+				<h2>Admin Login</h2>
 				<br>
-				<form action="login" method="POST" autocomplete="off">
+				<form action="adminLogin" method="POST" autocomplete="off">
 					<div class="form-group">
 						<label for="username">Username</label> <input type="text"
 							class="form-control" name="username" required>
@@ -34,11 +34,8 @@
 						<label for="password">Password</label> <input type="password"
 							class="form-control" name="password" required>
 					</div>
-					<p class="warning-message">Invalid Credentials</p>
+					<p class="warning-message">${ errorMessage }</p>
 					<button type="submit" class="btn btn-primary">Login</button>
-					<div class="bottom-message">
-						No Account Yet? <a href="sign-up.jsp">Sign up here</a>
-					</div>
 				</form>
 			</div>
 		</div>

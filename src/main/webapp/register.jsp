@@ -7,8 +7,8 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Lipan Bara Tech | Login</title>
-<link rel="stylesheet" href="./static/styles/login.css">
+<title>Lipan Bara Tech | Register</title>
+<link rel="stylesheet" href="./static/styles/sign-up.css">
 <link rel="stylesheet" href="./static/styles/bootstrap.min.css">
 </head>
 
@@ -23,21 +23,36 @@
 		</div>
 		<div id="outer">
 			<div id="inner">
-				<h2>Login</h2>
+				<h2>Sign Up</h2>
 				<br>
-				<form action="login" method="POST" autocomplete="off">
+				<form action="register" method="POST" autocomplete="off" required>
+					<div class="form-group">
+						<label for="name">Your Name</label> <input type="text"
+							class="form-control" name="name" placeholder="Lipan Bara"
+							required>
+					</div>
 					<div class="form-group">
 						<label for="username">Username</label> <input type="text"
-							class="form-control" name="username" required>
+							class="form-control" name="username" placeholder="lipanBara"
+							required>
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label> <input type="password"
 							class="form-control" name="password" required>
 					</div>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<textarea type="text" class="form-control" name="address" required></textarea>
+					</div>
+					<div class="form-group">
+						<label for="phone">Phone</label> <input type="tel"
+							class="form-control" name="phone" placeholder="+60123456789"
+							required>
+					</div>
 					<p class="warning-message">${ errorMessage }</p>
 					<button type="submit" class="btn btn-primary">Login</button>
 					<div class="bottom-message">
-						No Account Yet? <a href="register">Sign up here</a>
+						Already register? <a href="login">Login here</a>
 					</div>
 				</form>
 			</div>
