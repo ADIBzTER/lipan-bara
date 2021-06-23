@@ -27,9 +27,12 @@ public class AdminLoginServlet extends HttpServlet {
 
 			if (admin.isValid()) {
 				// Logged-in page
+				req.getSession().invalidate();
 				HttpSession session = req.getSession(true);
+
 				session.setAttribute("id", admin.getId());
 				session.setAttribute("username", admin.getUsername());
+				session.setAttribute("adminLoggedIn", true);
 
 				RequestDispatcher rd = req.getRequestDispatcher("product");
 				rd.forward(req, res);

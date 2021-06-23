@@ -13,12 +13,26 @@ public class LoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		// User logged in
+		Object loggedIn = req.getSession(true).getAttribute("loggedIn");
+		if (loggedIn != null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
 		rd.forward(req, res);
 	}
 
-	// Login attempt
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, java.io.IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		// User logged in
+		Object loggedIn = req.getSession(true).getAttribute("loggedIn");
+		if (loggedIn != null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		try {
 			CustomerBean customer = new CustomerBean();
 			customer.setUsername(req.getParameter("username"));
@@ -27,7 +41,10 @@ public class LoginServlet extends HttpServlet {
 
 			if (customer.isValid()) {
 				// Logged-in page
+				req.getSession().invalidate();
 				HttpSession session = req.getSession(true);
+
+				session.setAttribute("loggedIn", true);
 				session.setAttribute("id", customer.getId());
 				session.setAttribute("username", customer.getUsername());
 				session.setAttribute("address", customer.getAddress());

@@ -50,7 +50,7 @@
 							required>
 					</div>
 					<p class="warning-message">${ errorMessage }</p>
-					<button type="submit" class="btn btn-primary">Login</button>
+					<button type="submit" class="btn btn-primary">Register</button>
 					<div class="bottom-message">
 						Already register? <a href="login">Login here</a>
 					</div>

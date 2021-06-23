@@ -82,7 +82,7 @@ public class CustomerDAO {
 		return customer;
 	}
 
-	public static CustomerBean addCustomer(CustomerBean customer) {
+	public static void addCustomer(CustomerBean customer) {
 
 		// Preparing some objects for connection
 		PreparedStatement statement = null;
@@ -140,7 +140,6 @@ public class CustomerDAO {
 				connection = null;
 			}
 		}
-		return customer;
 	}
 
 	public static boolean isUsernameAvailable(String username) {

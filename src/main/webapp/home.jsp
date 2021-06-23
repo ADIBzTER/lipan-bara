@@ -41,7 +41,7 @@
 
 			<%-- Loop all products here --%>
 			<c:forEach items="${productList}" var="product">
-				<form action="cart" method="POST">
+				<form action="cart" method="GET" onsubmit="return addToCart(${product.id})">
 					<div class="product">
 						<input type="hidden" id="product-id" name="productId"
 							value="${ product.id }"> <img
@@ -51,7 +51,7 @@
 								class="product-description">${product.description} </span> <span
 								class="product-price">RM${product.price}</span> <span
 								class="product-buttons">
-								<button>Buy</button>
+								<button id="buy">Buy</button>
 								<button id="add-cart">Add to Cart</button>
 							</span>
 						</div>

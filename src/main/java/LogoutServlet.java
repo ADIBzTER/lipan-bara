@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
@@ -11,7 +12,16 @@ public class LogoutServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		req.getSession().invalidate();
-		res.sendRedirect("home");
+		Object adminLoggedIn = req.getSession(true).getAttribute("adminLoggedIn");
+		Object userLoggedIn = req.getSession(true).getAttribute("loggedIn");
+		if (adminLoggedIn != null) {
+			req.getSession(true).invalidate();
+			res.sendRedirect("adminLogin");
+		} else if (userLoggedIn != null) {
+			req.getSession(true).invalidate();
+			res.sendRedirect("login");
+		} else {
+			res.sendRedirect("home");
+		}
 	}
 }

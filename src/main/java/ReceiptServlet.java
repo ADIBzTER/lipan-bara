@@ -13,6 +13,14 @@ public class ReceiptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		// User not logged in
+		Object loggedIn = req.getSession(false).getAttribute("loggedIn");
+		if (loggedIn == null) {
+			res.sendRedirect("login");
+			return;
+		}
+
 		try {
 			// Update purchases table
 //			int productId = Integer.parseInt(req.getParameter("prodctId"));
@@ -29,6 +37,14 @@ public class ReceiptServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		// User not logged in
+		Object loggedIn = req.getSession(false).getAttribute("loggedIn");
+		if (loggedIn == null) {
+			res.sendRedirect("login");
+			return;
+		}
+
 		try {
 //			int productId = Integer.parseInt(req.getParameter("prodctId"));
 

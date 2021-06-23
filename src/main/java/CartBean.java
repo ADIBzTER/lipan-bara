@@ -6,6 +6,18 @@ public class CartBean {
 	private CustomerBean customer = new CustomerBean();
 	private ProductBean product = new ProductBean();
 
+	public CartBean() {
+		// PASS
+	}
+
+	public CartBean(int id, int custId, int prodId, CustomerBean customer, ProductBean product) {
+		this.id = id;
+		this.custId = custId;
+		this.prodId = prodId;
+		this.customer = customer;
+		this.product = product;
+	}
+
 	public int getId() {
 		return id;
 	}

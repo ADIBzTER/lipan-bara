@@ -7,7 +7,7 @@ public class CartDAO {
 
 	public static List<CartBean> getUserCart(int userId) {
 
-		List<CartBean> carts = new ArrayList<>();
+		List<CartBean> productList = new ArrayList<>();
 		String sql = "SELECT * " + "FROM carts ca " + "JOIN customers cu " + "ON ca.cust_id = cu.cust_id "
 				+ "JOIN products p " + "ON ca.prod_id = p.prod_id " + "WHERE ca.cust_id=?";
 
@@ -45,7 +45,7 @@ public class CartDAO {
 				product.setDescription(resultSet.getString("prod_description"));
 				product.setImageLocation(resultSet.getString("prod_image_location"));
 
-				carts.add(cart);
+				productList.add(cart);
 
 			}
 		} catch (Exception ex) {
@@ -74,6 +74,61 @@ public class CartDAO {
 				connection = null;
 			}
 		}
-		return carts;
+		return productList;
+	}
+
+	public static void addToCart(CartBean cart) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+		int custId = cart.getCustId();
+		int prodId = cart.getProdId();
+
+		// Prepared statement
+		String sql = "INSERT INTO carts VALUES (null, ?, ?)";
+
+		// Used to trace the process
+		System.out.println("in CartDAO.addToCart");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, custId);
+			statement.setInt(2, prodId);
+
+			statement.executeUpdate();
+			System.out.println("Product added to database.");
+
+		} catch (Exception ex) {
+			System.out.println("Error in CartDAO " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
 	}
 }

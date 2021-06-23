@@ -13,6 +13,13 @@ public class RegisterServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		// User logged in
+		Object loggedIn = req.getSession(true).getAttribute("loggedIn");
+		if (loggedIn != null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		RequestDispatcher rd = req.getRequestDispatcher("register.jsp");
 		rd.forward(req, res);
 	}
@@ -20,6 +27,14 @@ public class RegisterServlet extends HttpServlet {
 	// Register attempt
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, java.io.IOException {
 		try {
+
+			// User logged in
+			Object loggedIn = req.getSession(true).getAttribute("loggedIn");
+			if (loggedIn != null) {
+				res.sendRedirect("home");
+				return;
+			}
+
 			// Username Not Available
 			if (!CustomerDAO.isUsernameAvailable(req.getParameter("username"))) {
 				// Error page
@@ -37,25 +52,12 @@ public class RegisterServlet extends HttpServlet {
 				customer.setAddress(req.getParameter("address"));
 				customer.setPhone(req.getParameter("phone"));
 
+				// Insert customer into database
 				CustomerDAO.addCustomer(customer);
-				customer = CustomerDAO.login(customer);
 
-				if (customer.isValid()) {
-					// Logged-in page
-					HttpSession session = req.getSession(true);
-					session.setAttribute("id", customer.getId());
-					session.setAttribute("username", customer.getUsername());
-					session.setAttribute("address", customer.getAddress());
-					session.setAttribute("phone", customer.getPhone());
-					session.setAttribute("name", customer.getName());
-
-					res.sendRedirect("home");
-				} else {
-					// Error page
-					RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
-					req.setAttribute("errorMessage", "Invalid Credentials");
-					rd.forward(req, res);
-				}
+				// Login after register
+				RequestDispatcher rd = req.getRequestDispatcher("login");
+				rd.forward(req, res);
 			}
 		} catch (Throwable theException) {
 			System.out.println(theException);

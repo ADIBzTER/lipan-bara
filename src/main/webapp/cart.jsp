@@ -35,17 +35,20 @@
 	<div id="center">
 		<div class="products-table">
 
-			<div class="product">
-				<img src="${ product.imageLocation }" alt="product-image">
-				<div class="product-desc">
-					<span class="product-name">${ product.name }</span> <span
-						class="product-description">${ product.description } </span> <span
-						class="product-price">RM${ product.price }</span> <span
-						class="product-buttons">
-						<button>Remove From Cart</button>
-					</span>
+			<%-- Loop all products here --%>
+			<c:forEach items="${productList}" var="product">
+				<div class="product">
+					<img src="${ product.product.imageLocation }" alt="product-image">
+					<div class="product-desc">
+						<span class="product-name">${ product.product.name }</span> <span
+							class="product-description">${ product.product.description }
+						</span> <span class="product-price">RM${ product.product.price }</span> <span
+							class="product-buttons">
+							<button>Remove From Cart</button>
+						</span>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 
 		</div>
 	</div>

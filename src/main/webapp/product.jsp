@@ -47,10 +47,10 @@
 				<%-- Loop all products here --%>
 				<c:forEach items="${productList}" var="product">
 					<tr>
-						<td>${ product.prodId }</td>
-						<td>${ product.prodName }</td>
-						<td>${ product.prodPrice }</td>
-						<td>${ product.prodQuantity }</td>
+						<td>${ product.id }</td>
+						<td>${ product.name }</td>
+						<td>${ product.price }</td>
+						<td>${ product.quantity }</td>
 						<td>${ product.supplier.name}</td>
 					</tr>
 				</c:forEach>

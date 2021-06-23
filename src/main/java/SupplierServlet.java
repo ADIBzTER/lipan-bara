@@ -13,6 +13,14 @@ public class SupplierServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		// Admin not logged in
+		Object loggedIn = req.getSession(false).getAttribute("adminLoggedIn");
+		if (loggedIn == null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		try {
 
 			req.setAttribute("supplierList", SupplierDAO.getAll());

@@ -13,12 +13,14 @@ public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
-		// TODO CHECK SESSION
-//		if (!req.getSession().isNew()) {
-//			RequestDispatcher rd = req.getRequestDispatcher("admin-login.jsp");
-//			rd.forward(req, res);
-//		}
+
+		// Admin not logged in
+		Object loggedIn = req.getSession(false).getAttribute("adminLoggedIn");
+		if (loggedIn == null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		try {
 
 			req.setAttribute("productList", ProductDAO.getAll());
@@ -33,6 +35,14 @@ public class ProductServlet extends HttpServlet {
 
 	// After Login
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		// Admin not logged in
+		Object loggedIn = req.getSession(false).getAttribute("adminLoggedIn");
+		if (loggedIn == null) {
+			res.sendRedirect("home");
+			return;
+		}
+
 		try {
 
 			req.setAttribute("productList", ProductDAO.getAll());
