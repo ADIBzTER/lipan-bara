@@ -41,20 +41,20 @@
 
 			<%-- Loop all products here --%>
 			<c:forEach items="${productList}" var="product">
-				<form action="cart" method="GET" onsubmit="return addToCart(${product.id})">
-					<div class="product">
-						<input type="hidden" id="product-id" name="productId"
-							value="${ product.id }"> <img
-							src="${product.imageLocation}" alt="product-image">
-						<div class="product-desc">
-							<span class="product-name">${product.name}</span> <span
-								class="product-description">${product.description} </span> <span
-								class="product-price">RM${product.price}</span> <span
-								class="product-buttons">
-								<button id="buy">Buy</button>
-								<button id="add-cart">Add to Cart</button>
-							</span>
-						</div>
+				<form class="product" action="cart" method="GET"
+					onsubmit="return false">
+					<input type="hidden" class="cart-activity" name="cartActivity" value="addToCart">
+					<input type="hidden" class="product-id" name="productId"
+						value="${ product.id }"> <img
+						src="${product.imageLocation}" alt="product-image">
+					<div class="product-desc">
+						<span class="product-name">${product.name}</span> <span
+							class="product-description">${product.description} </span> <span
+							class="product-price">RM${product.price} | Available: ${ product.quantity }</span><span
+							class="product-buttons">
+							<button id="buy">Buy</button>
+							<button id="add-cart">Add to Cart</button>
+						</span>
 					</div>
 				</form>
 			</c:forEach>

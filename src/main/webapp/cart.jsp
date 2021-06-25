@@ -35,19 +35,26 @@
 	<div id="center">
 		<div class="products-table">
 
-			<%-- Loop all products here --%>
-			<c:forEach items="${productList}" var="product">
-				<div class="product">
-					<img src="${ product.product.imageLocation }" alt="product-image">
+			<c:set var="totalPrice" value="0.0" />
+
+			<%-- Loop all products in cart here --%>
+			<c:forEach items="${cartList}" var="cart">
+				<form class="product" action="cart" method="POST">
+					<input type="hidden" name="cartActivity" value="removeFromCart">
+					<input type="hidden" name="cartId" value="${ cart.id }"> <img
+						src="${ cart.product.imageLocation }" alt="product-image">
 					<div class="product-desc">
-						<span class="product-name">${ product.product.name }</span> <span
-							class="product-description">${ product.product.description }
-						</span> <span class="product-price">RM${ product.product.price }</span> <span
+						<span class="product-name">${ cart.product.name }</span> <span
+							class="product-description">${ cart.product.description }
+						</span> <span class="product-price">RM${ cart.product.price }</span> <span
 							class="product-buttons">
 							<button>Remove From Cart</button>
 						</span>
 					</div>
-				</div>
+				</form>
+
+				<c:set var="totalPrice" value="${ totalPrice + cart.product.price }" />
+
 			</c:forEach>
 
 		</div>
@@ -56,14 +63,24 @@
 	<div id="cart-footer">
 		<div class="grid-item">
 			Name: ${ name }<br> Phone: ${ phone } <br> Address: ${ address }
-			<br> Shipping Method: Lipan Express
+			<br> Shipping Method: Lipan Express <br> Total: RM${ totalPrice }
 		</div>
 		<div class="grid-item">
-			<div class="pay-div">
-				<a href="receipt">
-					<button>Pay</button>
-				</a>
-			</div>
+
+			<%-- Check if there is item in cart --%>
+			<c:choose>
+				<c:when test="${cartList.size() != 0}">
+					<div class="pay-div">
+						<a href="receipt">
+							<button>Pay</button>
+						</a>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<%-- NOTHING --%>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</div>
 </body>
