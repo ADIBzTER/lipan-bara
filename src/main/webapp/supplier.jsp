@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./images/favicon.ico" />
 <title>Lipan Bara Tech | Admin Dashboard</title>
 <link rel="stylesheet" href="static/styles/supplier.css">
 </head>
@@ -18,7 +19,9 @@
 
 		<div id="appbar-left">
 			<div id="main-logo">
-				<h1>Lipan Bara | Admin Dashboard</h1>
+				<h1>
+					<a href="home">Lipan Bara</a> | Admin Dashboard
+				</h1>
 			</div>
 		</div>
 
@@ -35,6 +38,7 @@
 	<div id="center">
 		<div class="products-table">
 
+			<h2>Suppliers</h2>
 			<table>
 				<tr>
 					<th>Supplier Id</th>

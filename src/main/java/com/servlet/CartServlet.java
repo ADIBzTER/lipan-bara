@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bean.*;
 import com.dao.*;
@@ -39,7 +38,7 @@ public class CartServlet extends HttpServlet {
 		}
 	}
 
-	// Insert product to cart
+	// Insert to cart or Remove from cart
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// User not logged in

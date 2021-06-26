@@ -2,7 +2,7 @@ package com.dao;
 
 import java.sql.*;
 
-import com.connection.*;
+import com.config.*;
 import com.bean.*;
 
 public class CustomerDAO {

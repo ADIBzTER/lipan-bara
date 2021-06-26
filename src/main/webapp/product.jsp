@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.config.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./images/favicon.ico" />
 <title>Lipan Bara Tech | Admin Dashboard</title>
 <link rel="stylesheet" href="static/styles/product.css">
 </head>
@@ -18,7 +20,9 @@
 
 		<div id="appbar-left">
 			<div id="main-logo">
-				<h1>Lipan Bara | Admin Dashboard</h1>
+				<h1>
+					<a href="home">Lipan Bara</a> | Admin Dashboard
+				</h1>
 			</div>
 		</div>
 
@@ -35,9 +39,14 @@
 	<div id="center">
 		<div class="products-table">
 
+			<h2>Products</h2>
+			<a href="product?updateProduct">
+				<button>Add Product</button>
+			</a>
 			<table>
 				<tr>
 					<th>Product Id</th>
+					<th>Product Image</th>
 					<th>Product Name</th>
 					<th>Price(RM)</th>
 					<th>Quantity In Stock</th>
@@ -48,8 +57,10 @@
 				<c:forEach items="${productList}" var="product">
 					<tr>
 						<td>${ product.id }</td>
+						<td><img class="product-image"
+							src="${ product.imageLocation }" alt="product-image"></td>
 						<td>${ product.name }</td>
-						<td>${ product.price }</td>
+						<td>${ CurrencyFormatter.format(product.price) }</td>
 						<td>${ product.quantity }</td>
 						<td>${ product.supplier.name}</td>
 					</tr>

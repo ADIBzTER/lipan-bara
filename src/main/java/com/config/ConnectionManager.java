@@ -1,4 +1,4 @@
-package com.connection;
+package com.config;
 
 import java.sql.*;
 

@@ -3,7 +3,7 @@ package com.dao;
 import java.sql.*;
 import java.util.*;
 
-import com.connection.*;
+import com.config.*;
 import com.bean.*;
 
 public class PurchaseDAO {

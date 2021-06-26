@@ -3,7 +3,7 @@ package com.dao;
 import java.sql.*;
 import java.util.*;
 
-import com.connection.*;
+import com.config.*;
 import com.bean.*;
 
 public class ProductDAO {
@@ -142,5 +142,70 @@ public class ProductDAO {
 			}
 		}
 		return product;
+	}
+
+	// Add one product
+	public static void addOne(ProductBean product) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+		String name = product.getName();
+		int quantity = product.getQuantity();
+		double price = product.getPrice();
+		String description = product.getDescription();
+		String imageLocation = product.getImageLocation();
+		int suppId = product.getSuppId();
+
+		// Prepared statement
+		String sql = "INSERT INTO products (prod_name, prod_quantity, prod_price, prod_description, prod_image_location, supp_id) "
+				+ "VALUES (?, ?, ?, ?, ?, ?);";
+
+		// Used to trace the process
+		System.out.println("in ProductDAO.addOne");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setString(1, name);
+			statement.setInt(2, quantity);
+			statement.setDouble(3, price);
+			statement.setString(4, description);
+			statement.setString(5, imageLocation);
+			statement.setInt(6, suppId);
+
+			statement.executeUpdate();
+			System.out.println("Product added to database.");
+
+		} catch (Exception ex) {
+			System.out.println("Error in CartDAO.addToCart " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
 	}
 }

@@ -23,7 +23,8 @@ body {
   width: 100%;
   padding: 0 10px;
   background-color: $primary-color;
-  grid-template-columns: 180px auto 150px;
+  // grid-template-columns: 180px auto 150px;
+  grid-template-columns: 180px auto 250px;
   grid-template-rows: auto;
   align-items: center;
   color: whitesmoke;
@@ -32,13 +33,24 @@ body {
     color: whitesmoke;
     text-decoration: none;
     font-weight: bold;
+
+    &:hover {
+      color: black;
+    }
   }
 
   #search-bar {
     height: 35px;
-    width: 90%;
+    width: 80%;
     border: solid $border-color;
     border-radius: 10px;
+		font-size: 1.2rem;
+  }
+
+  .grid-element {
+    display: flex;
+    align-self: center;
+    justify-self: center;
   }
 }
 

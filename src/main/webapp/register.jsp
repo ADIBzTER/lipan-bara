@@ -7,6 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="icon" href="./images/favicon.ico" />
 <title>Lipan Bara Tech | Register</title>
 <link rel="stylesheet" href="./static/styles/sign-up.css">
 <link rel="stylesheet" href="./static/styles/bootstrap.min.css">

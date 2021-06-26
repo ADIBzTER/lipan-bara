@@ -19,6 +19,10 @@ a {
   color: whitesmoke;
   text-decoration: none;
   font-weight: bold;
+
+	&:hover {
+		color: black;
+	}
 }
 
 button {
@@ -71,7 +75,7 @@ button {
 }
 
 #center {
-  padding-top: 100px;
+  padding: 50px 0 130px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +84,7 @@ button {
   .products-table {
     table {
       border-collapse: collapse;
-      width: 100%;
+      width: 80vw;
 
       th {
         background-color: $primary-color;

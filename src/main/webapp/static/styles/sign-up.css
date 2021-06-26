@@ -6,7 +6,7 @@ body {
 }
 
 .top {
-  height: 20vh;
+  height: 10vh;
 }
 
 .grid {
@@ -17,7 +17,7 @@ body {
 }
 
 .grid #title {
-  margin: 30% 0 0 100px;
+  margin: 50% 0 0 100px;
 }
 
 .grid #title h5 {
@@ -35,6 +35,7 @@ body {
 }
 
 #inner {
+  width: 500px;
   background-color: white;
   border: solid 1px #d8d8d8fd;
   border-radius: 25px;
@@ -42,6 +43,10 @@ body {
   box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px -1px 45px 1px rgba(0, 0, 0, 0.22);
+}
+
+#inner .warning-message {
+  color: red;
 }
 
 #inner .bottom-message {

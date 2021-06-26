@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.config.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="icon" href="./images/favicon.ico" />
 <title>Lipan Bara Tech | Cart</title>
 <link rel="stylesheet" href="static/styles/cart.css">
 </head>
@@ -46,14 +48,14 @@
 					<div class="product-desc">
 						<span class="product-name">${ cart.product.name }</span> <span
 							class="product-description">${ cart.product.description }
-						</span> <span class="product-price">RM${ cart.product.price }</span> <span
+						</span> <span class="product-price">RM${ CurrencyFormatter.format(cart.product.price) }</span> <span
 							class="product-buttons">
 							<button>Remove From Cart</button>
 						</span>
 					</div>
 				</form>
 
-				<c:set var="totalPrice" value="${ totalPrice + cart.product.price }" />
+				<c:set var="totalPrice" value="${ CurrencyFormatter.format(totalPrice + cart.product.price) }" />
 
 			</c:forEach>
 
