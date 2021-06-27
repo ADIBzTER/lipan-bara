@@ -14,7 +14,7 @@ public class SupplierDAO {
 
 		// Preparing some objects/variable
 		List<SupplierBean> supplierList = new LinkedList<>();
-		String sql = "select * from suppliers;";
+		String sql = "SELECT * FROM suppliers ORDER BY supp_id;";
 
 		Statement statement = null;
 

@@ -15,10 +15,14 @@ public class LogoutServlet extends HttpServlet {
 
 		Object adminLoggedIn = req.getSession(true).getAttribute("adminLoggedIn");
 		Object userLoggedIn = req.getSession(true).getAttribute("loggedIn");
+		
+		// Admin session exists
 		if (adminLoggedIn != null) {
 			req.getSession(true).invalidate();
 			res.sendRedirect("adminLogin");
-		} else if (userLoggedIn != null) {
+		}
+		// Customer  session exists
+		else if (userLoggedIn != null) {
 			req.getSession(true).invalidate();
 			res.sendRedirect("login");
 		} else {

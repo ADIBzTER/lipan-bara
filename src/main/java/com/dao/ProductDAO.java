@@ -13,7 +13,7 @@ public class ProductDAO {
 	public static List<ProductBean> getAll() {
 		// Preparing some objects/variable
 		List<ProductBean> productList = new LinkedList<>();
-		String sql = "SELECT * FROM products p JOIN suppliers s ON (p.supp_id = s.supp_id);";
+		String sql = "SELECT * FROM products p JOIN suppliers s ON (p.supp_id = s.supp_id) ORDER BY prod_id;";
 
 		Statement statement = null;
 
@@ -182,6 +182,113 @@ public class ProductDAO {
 
 		} catch (Exception ex) {
 			System.out.println("Error in CartDAO.addToCart " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
+
+	public static void deleteOne(int productId) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "DELETE FROM products WHERE prod_id = ?";
+
+		// Used to trace the process
+		System.out.println("in ProductDAO.deleteOne");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, productId);
+
+			statement.executeUpdate();
+			System.out.println("Product remove from database.");
+
+		} catch (Exception ex) {
+			System.out.println("Error in Product.DAO.deleteOne" + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
+
+	public static void updateOne(ProductBean bean) {
+
+		// Preparing some objects for connection
+		PreparedStatement statement = null;
+
+		// Prepared statement
+		String sql = "UPDATE products "
+				+ "SET prod_name = ?, prod_quantity = ?, prod_price = ?, prod_description = ?, prod_image_location = ?, supp_id = ? "
+				+ " WHERE prod_id = ?";
+
+		// Used to trace the process
+		System.out.println("in ProductDAO.updateOne");
+
+		try {
+			// Connect to lipan_db
+			connection = ConnectionManager.getConnection();
+
+			// Prepared statement
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, productId);
+			statement.setString(1, );
+
+			statement.executeUpdate();
+			System.out.println("Product remove from database.");
+
+		} catch (Exception ex) {
+			System.out.println("Error in Product.DAO.deleteOne" + ex);
 		}
 		// Some exception handling
 		finally {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.config.*" %>
+<%@ page import="com.config.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,9 +31,9 @@
 					</h3>
 				</c:when>
 				<c:otherwise>
-				<h3>
-					<a href="register">Sign Up</a> | <a href="login">Login</a>
-				</h3>
+					<h3>
+						<a href="register">Sign Up</a> | <a href="login">Login</a>
+					</h3>
 				</c:otherwise>
 			</c:choose>
 
@@ -54,8 +54,8 @@
 					<div class="product-desc">
 						<span class="product-name">${product.name}</span> <span
 							class="product-description">${product.description} </span> <span
-							class="product-price">RM${CurrencyFormatter.format(product.price)} | Available: ${ product.quantity }</span><span
-							class="product-buttons">
+							class="product-price">RM${CurrencyFormatter.format(product.price)}
+							| Available: ${ product.quantity }</span><span class="product-buttons">
 							<button id="buy">Buy</button>
 							<button id="add-cart">Add to Cart</button>
 						</span>

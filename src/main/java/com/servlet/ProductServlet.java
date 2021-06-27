@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.servlet.annotation.*;
 
+import com.config.*;
 import com.dao.*;
 import com.bean.*;
 
@@ -32,13 +33,27 @@ public class ProductServlet extends HttpServlet {
 			return;
 		}
 
-		if (req.getParameter("updateProduct") != null) {
+		// ADD
+		if (req.getParameter("addProduct") != null) {
 			req.setAttribute("supplierList", SupplierDAO.getAll());
 			RequestDispatcher rd = req.getRequestDispatcher("product-update.jsp");
 			rd.forward(req, res);
-		} else {
-			try {
+		}
 
+		// UPDATE
+		else if (req.getParameter("updateProduct") != null) {
+			req.setAttribute("supplierList", SupplierDAO.getAll());
+
+			int productId = Integer.parseInt(req.getParameter("productId"));
+			req.setAttribute("product", ProductDAO.getOne(productId));
+
+			RequestDispatcher rd = req.getRequestDispatcher("product-update.jsp");
+			rd.forward(req, res);
+		}
+
+		// DISPLAY
+		else {
+			try {
 				req.setAttribute("productList", ProductDAO.getAll());
 
 				RequestDispatcher rd = req.getRequestDispatcher("product.jsp");
@@ -60,18 +75,19 @@ public class ProductServlet extends HttpServlet {
 		}
 
 		try {
-			if (req.getParameter("addProduct") != null) {
+			String productActivity = req.getParameter("productActivity");
 
-				String path = "C:\\Users\\Adib Zaini\\Desktop\\CS230 PART 4\\CSC584 - Enterprise Programming\\Project\\LipanBara\\src\\main\\webapp\\images\\";
+			ProductBean product;
+			switch (productActivity) {
 
-				// Handle uploaded file
-				Part filePart = req.getPart("image");
-				String fileName = filePart.getSubmittedFileName();
-				for (Part part : req.getParts()) {
-					part.write(path + fileName);
-				}
+			case "addProduct":
+				String uploadPath = "C:\\Users\\Adib Zaini\\Desktop\\CS230 PART 4\\CSC584 - Enterprise Programming\\Project\\LipanBara\\src\\main\\webapp\\images\\";
+				Part part = req.getPart("image");
 
-				ProductBean product = new ProductBean();
+				// Upload image to server
+				String fileName = ImageUploader.upload(uploadPath, part);
+
+				product = new ProductBean();
 				product.setName(req.getParameter("name"));
 				product.setQuantity(Integer.parseInt(req.getParameter("quantity")));
 				product.setPrice(Double.parseDouble(req.getParameter("price")));
@@ -80,17 +96,26 @@ public class ProductServlet extends HttpServlet {
 				product.setSuppId(Integer.parseInt(req.getParameter("supplierId")));
 
 				ProductDAO.addOne(product);
-				
-				res.sendRedirect("product");
-			} else {
-				res.sendRedirect("product");
 
-//				req.setAttribute("productList", ProductDAO.getAll());
-//
-//				RequestDispatcher rd = req.getRequestDispatcher("product.jsp");
-//				rd.forward(req, res);
+				res.sendRedirect("product");
+				System.out.println(fileName + " uploaded");
+				break;
+
+			case "deleteProduct":
+				ProductDAO.deleteOne(Integer.parseInt(req.getParameter("productId")));
+				res.sendRedirect("product");
+				break;
+
+			case "updateProduct":
+				product = ProductDAO.getOne(Integer.parseInt(req.getParameter("productId")));
+				ProductDAO.updateOne(product);
+				res.sendRedirect("product");
+				break;
+
+			default:
+				res.sendRedirect("product");
+				break;
 			}
-
 		} catch (Throwable theException) {
 			System.out.println(theException);
 		}

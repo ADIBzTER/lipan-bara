@@ -15,7 +15,7 @@ public class CartDAO {
 
 		List<CartBean> cartList = new ArrayList<>();
 		String sql = "SELECT * FROM carts ca JOIN customers cu ON ca.cust_id = cu.cust_id "
-				+ "JOIN products p ON ca.prod_id = p.prod_id WHERE ca.cust_id=?;";
+				+ "JOIN products p ON ca.prod_id = p.prod_id WHERE ca.cust_id=? ORDER BY cart_id;";
 
 		PreparedStatement statement = null;
 

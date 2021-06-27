@@ -39,27 +39,40 @@
 	<div id="center">
 		<div class="products-table">
 
-			<h2>Add Or Update Product</h2>
+			<c:choose>
+				<c:when test="${param[\"addProduct\"] != null}">
+					<h2>Add Product</h2>
+				</c:when>
+				<c:otherwise>
+					<h2>Update Product</h2>
+				</c:otherwise>
+			</c:choose>
+
 			<form action="product" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="addProduct">
+				<input type="hidden" name="productActivity" value="addProduct">
+
 				<div class="input-class">
 					<label for="name">Name </label> <br> <input name="name"
-						id="name" type="text" required> <br>
+						id="name" type="text" autocomplete="off" required
+						value="${product.name }"> <br>
 				</div>
 
 				<div class="input-class">
 					<label for="quantity">Quantity </label> <br> <input
-						name="quantity" id="quantity" type="number" required> <br>
+						name="quantity" id="quantity" type="number" min="1"
+						autocomplete="off" required value="${ product.quantity }">
+					<br>
 				</div>
 
 				<div class="input-class">
-					<label for="price">Price </label> <br> <input name="price"
-						id="price" type="number" required> <br>
+					<label for="price">Price(RM) </label> <br> <input name="price"
+						id="price" type="number" min="1" autocomplete="off" required
+						value="${ product.price }"> <br>
 				</div>
 
 				<div class="input-class">
 					<label for="description">Description </label> <br>
-					<textarea name="description" id="description" type="text" required></textarea>
+					<textarea name="description" id="description" required>${ product.description }</textarea>
 					<br>
 				</div>
 
@@ -75,10 +88,18 @@
 
 						<%-- Loop all suppliers here --%>
 						<c:forEach items="${supplierList}" var="supplier">
-							<option value="${ supplier.id }">${ supplier.name }</option>
+							<c:choose>
+								<c:when test="${ product.suppId == supplier.id }">
+									<option value="${ supplier.id }" selected>${ supplier.name }</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${ supplier.id }">${ supplier.name }</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 
 					</select>
+
 				</div>
 			</form>
 
@@ -90,7 +111,7 @@
 			<div class="navbar-grid">
 				<button id="add">Add</button>
 				<a href="product">
-					<button style="background-color: #ff5a5f;">Cancel</button>
+					<button style="background-color: #ff5a5f; color: white;">Cancel</button>
 				</a>
 			</div>
 		</div>
@@ -99,16 +120,6 @@
 	<script>
 	const addButton = document.querySelector('#add');
 	addButton.onclick = (e) => {
-		let files = document.querySelector('#image').files;
-		let file = files[0];
-
-		let fileName = file.name;
-		fileName = fileName.split('\.');
-		fileName = Date.now() + fileName[fileName.length - 1];
-		file.name = fileName;
-		
-		files[0] = file;
-		
 		document.querySelector('form').submit();
 	}
 </script>

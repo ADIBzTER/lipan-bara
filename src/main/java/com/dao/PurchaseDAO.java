@@ -15,7 +15,7 @@ public class PurchaseDAO {
 
 		List<PurchaseBean> purchaseList = new LinkedList<>();
 		String sql = "SELECT * FROM purchases pur JOIN customers c ON pur.cust_id = c.cust_id "
-				+ "JOIN products pro ON pur.prod_id = pro.prod_id;";
+				+ "JOIN products pro ON pur.prod_id = pro.prod_id ORDER BY purc_id;";
 		Statement statement = null;
 
 		// Trace process

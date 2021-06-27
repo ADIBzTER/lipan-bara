@@ -17,6 +17,13 @@ public class AdminLoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		// Admin  logged in
+		Object adminLoggedIn = req.getSession(true).getAttribute("adminLoggedIn");
+		if (adminLoggedIn != null) {
+			res.sendRedirect("product");
+			return;
+		}
+
 		RequestDispatcher rd = req.getRequestDispatcher("admin-login.jsp");
 		rd.forward(req, res);
 	}
@@ -38,8 +45,7 @@ public class AdminLoginServlet extends HttpServlet {
 				session.setAttribute("username", admin.getUsername());
 				session.setAttribute("adminLoggedIn", true);
 
-				RequestDispatcher rd = req.getRequestDispatcher("product");
-				rd.forward(req, res);
+				res.sendRedirect("product");
 			} else {
 				// Error page
 				RequestDispatcher rd = req.getRequestDispatcher("admin-login.jsp");

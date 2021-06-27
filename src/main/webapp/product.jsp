@@ -19,7 +19,7 @@
 	<div id="app-bar">
 
 		<div id="appbar-left">
-			<div id="main-logo">
+			<div id="mainlogo">
 				<h1>
 					<a href="home">Lipan Bara</a> | Admin Dashboard
 				</h1>
@@ -30,7 +30,7 @@
 			<h3>${ username }</h3>
 			|
 			<div id="logout">
-				<a href="adminLogin">Logout</a>
+				<a href="logout">Logout</a>
 			</div>
 		</div>
 
@@ -40,7 +40,7 @@
 		<div class="products-table">
 
 			<h2>Products</h2>
-			<a href="product?updateProduct">
+			<a href="product?addProduct=true">
 				<button>Add Product</button>
 			</a>
 			<table>
@@ -51,6 +51,8 @@
 					<th>Price(RM)</th>
 					<th>Quantity In Stock</th>
 					<th>Supplier</th>
+					<th>Update</th>
+					<th>Delete</th>
 				</tr>
 
 				<%-- Loop all products here --%>
@@ -63,6 +65,10 @@
 						<td>${ CurrencyFormatter.format(product.price) }</td>
 						<td>${ product.quantity }</td>
 						<td>${ product.supplier.name}</td>
+						<td><a
+							href="product?updateProduct=true&productId=${ product.id }"><button
+									id="${ product.id }" class="update-button">Update</button></a></td>
+						<td><button id="${ product.id }" class="delete-button">Delete</button></td>
 					</tr>
 				</c:forEach>
 
@@ -82,6 +88,7 @@
 		</div>
 	</div>
 
+	<script src="./static/scripts/product.js"></script>
 </body>
 
 </html>

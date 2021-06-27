@@ -129,6 +129,26 @@ button:hover {
   padding: 10px;
 }
 
+#center .products-table table .update-button {
+  background-color: #95d5b2;
+  color: white;
+}
+
+#center .products-table table .update-button:hover {
+  background-color: white;
+  color: black;
+}
+
+#center .products-table table .delete-button {
+  background-color: #ff5a5f;
+  color: white;
+}
+
+#center .products-table table .delete-button:hover {
+  background-color: white;
+  color: black;
+}
+
 #center .products-table table .product-image {
   width: 200px;
 }
