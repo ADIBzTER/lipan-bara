@@ -76,16 +76,19 @@ public class ProductServlet extends HttpServlet {
 
 		try {
 			String productActivity = req.getParameter("productActivity");
+			String uploadPath = "C:\\Users\\Adib Zaini\\Desktop\\CS230 PART 4\\CSC584 - Enterprise Programming\\Project\\LipanBara\\src\\main\\webapp\\images\\";
 
+			String fileName;
 			ProductBean product;
+			Part part;
+
 			switch (productActivity) {
 
 			case "addProduct":
-				String uploadPath = "C:\\Users\\Adib Zaini\\Desktop\\CS230 PART 4\\CSC584 - Enterprise Programming\\Project\\LipanBara\\src\\main\\webapp\\images\\";
-				Part part = req.getPart("image");
+				part = req.getPart("image");
 
 				// Upload image to server
-				String fileName = ImageUploader.upload(uploadPath, part);
+				fileName = ImageUploader.upload(uploadPath, part);
 
 				product = new ProductBean();
 				product.setName(req.getParameter("name"));
@@ -107,8 +110,30 @@ public class ProductServlet extends HttpServlet {
 				break;
 
 			case "updateProduct":
-				product = ProductDAO.getOne(Integer.parseInt(req.getParameter("productId")));
+				product = new ProductBean();
+
+				// New image uploaded
+				if (req.getPart("image").getSize() != 0) {
+					part = req.getPart("image");
+
+					// Upload image to server
+					fileName = ImageUploader.upload(uploadPath, part);
+
+					product.setImageLocation("images/" + fileName);
+					System.out.println(fileName + " uploaded");
+				} else {
+					product.setImageLocation(req.getParameter("imageLocation"));
+				}
+
+				product.setId(Integer.parseInt(req.getParameter("id")));
+				product.setName(req.getParameter("name"));
+				product.setQuantity(Integer.parseInt(req.getParameter("quantity")));
+				product.setPrice(Double.parseDouble(req.getParameter("price")));
+				product.setDescription(req.getParameter("description"));
+				product.setSuppId(Integer.parseInt(req.getParameter("supplierId")));
+
 				ProductDAO.updateOne(product);
+
 				res.sendRedirect("product");
 				break;
 

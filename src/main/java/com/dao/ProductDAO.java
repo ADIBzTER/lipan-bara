@@ -261,7 +261,7 @@ public class ProductDAO {
 		}
 	}
 
-	public static void updateOne(ProductBean bean) {
+	public static void updateOne(ProductBean product) {
 
 		// Preparing some objects for connection
 		PreparedStatement statement = null;
@@ -281,11 +281,16 @@ public class ProductDAO {
 			// Prepared statement
 			statement = connection.prepareStatement(sql);
 
-			statement.setInt(1, productId);
-			statement.setString(1, );
+			statement.setString(1, product.getName());
+			statement.setInt(2, product.getQuantity());
+			statement.setDouble(3, product.getPrice());
+			statement.setString(4, product.getDescription());
+			statement.setString(5, product.getImageLocation());
+			statement.setInt(6, product.getSuppId());
+			statement.setInt(7, product.getId());
 
 			statement.executeUpdate();
-			System.out.println("Product remove from database.");
+			System.out.println("Product updated.");
 
 		} catch (Exception ex) {
 			System.out.println("Error in Product.DAO.deleteOne" + ex);

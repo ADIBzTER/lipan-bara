@@ -49,7 +49,18 @@
 			</c:choose>
 
 			<form action="product" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="productActivity" value="addProduct">
+				<input type="hidden" name="id" value="${ product.id }"> <input
+					type="hidden" name="imageLocation"
+					value="${ product.imageLocation }">
+
+				<c:choose>
+					<c:when test="${param[\"addProduct\"] != null}">
+						<input type="hidden" name="productActivity" value="addProduct">
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" name="productActivity" value="updateProduct">
+					</c:otherwise>
+				</c:choose>
 
 				<div class="input-class">
 					<label for="name">Name </label> <br> <input name="name"
@@ -77,9 +88,20 @@
 				</div>
 
 				<div class="input-class">
-					<label for="image">Upload Product Image</label> <br> <input
-						type="file" name="image" id="image" accept=".png,.jpg,.jpeg"
-						required> <br>
+					<label for="image">Upload Product Image</label> <br>
+
+					<c:choose>
+						<c:when test="${param[\"addProduct\"] != null}">
+							<input type="file" name="image" id="image"
+								accept=".png,.jpg,.jpeg" required>
+						</c:when>
+						<c:otherwise>
+							<input type="file" name="image" id="image"
+								accept=".png,.jpg,.jpeg">
+						</c:otherwise>
+					</c:choose>
+
+					<br>
 				</div>
 
 				<div class="input-class">
@@ -109,7 +131,14 @@
 	<div class="navbar">
 		<div class="navbar-flex">
 			<div class="navbar-grid">
-				<button id="add">Add</button>
+				<c:choose>
+					<c:when test="${param[\"addProduct\"] != null}">
+						<button id="submit">Add</button>
+					</c:when>
+					<c:otherwise>
+						<button id="submit">Update</button>
+					</c:otherwise>
+				</c:choose>
 				<a href="product">
 					<button style="background-color: #ff5a5f; color: white;">Cancel</button>
 				</a>
@@ -118,7 +147,7 @@
 	</div>
 
 	<script>
-	const addButton = document.querySelector('#add');
+	const addButton = document.querySelector('#submit');
 	addButton.onclick = (e) => {
 		document.querySelector('form').submit();
 	}
