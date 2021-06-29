@@ -5,6 +5,7 @@ public class PurchaseBean {
 	private String date;
 	private String shipping;
 	private int quantity;
+	private double price;
 	private int custId;
 	private int prodId;
 
@@ -41,6 +42,14 @@ public class PurchaseBean {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public int getCustId() {

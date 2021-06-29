@@ -38,7 +38,7 @@ public class AdminLoginServlet extends HttpServlet {
 
 			if (admin.isValid()) {
 				// Logged-in page
-				req.getSession().invalidate();
+				req.getSession(true).invalidate();
 				HttpSession session = req.getSession(true);
 
 				session.setAttribute("id", admin.getId());

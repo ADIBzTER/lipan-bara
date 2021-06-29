@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.config.*" %>
+<%@ page import="com.config.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,8 @@
 		<div id="appbar-left">
 			<div id="main-logo">
 				<h1>
-					<a href="home">Lipan Bara</a> | Cart
+					<a href="home">Lipan Bara</a>
+					| Cart
 				</h1>
 			</div>
 		</div>
@@ -43,19 +44,23 @@
 			<c:forEach items="${cartList}" var="cart">
 				<form class="product" action="cart" method="POST">
 					<input type="hidden" name="cartActivity" value="removeFromCart">
-					<input type="hidden" name="cartId" value="${ cart.id }"> <img
-						src="${ cart.product.imageLocation }" alt="product-image">
+					<input type="hidden" name="cartId" value="${ cart.id }">
+
+					<img src="${ cart.product.imageLocation }" alt="product-image">
+
 					<div class="product-desc">
-						<span class="product-name">${ cart.product.name }</span> <span
-							class="product-description">${ cart.product.description }
-						</span> <span class="product-price">RM${ CurrencyFormatter.format(cart.product.price) }</span> <span
-							class="product-buttons">
+						<span class="product-name">${ cart.product.name }</span>
+						<span class="product-description">${ cart.product.description }
+						</span>
+						<span class="product-price">RM${ CurrencyFormatter.format(cart.product.price) }</span>
+						<span class="product-buttons">
 							<button>Remove From Cart</button>
 						</span>
 					</div>
 				</form>
 
-				<c:set var="totalPrice" value="${ CurrencyFormatter.format(totalPrice + cart.product.price) }" />
+				<c:set var="totalPrice"
+					value="${ totalPrice + cart.product.price }" />
 
 			</c:forEach>
 
@@ -64,8 +69,15 @@
 
 	<div id="cart-footer">
 		<div class="grid-item">
-			Name: ${ name }<br> Phone: ${ phone } <br> Address: ${ address }
-			<br> Shipping Method: Lipan Express <br> Total: RM${ totalPrice }
+			Name: ${ name }
+			<br>
+			Phone: ${ phone }
+			<br>
+			Address: ${ address }
+			<br>
+			Shipping Method: Lipan Express
+			<br>
+			Total: RM${ CurrencyFormatter.format(totalPrice) }
 		</div>
 		<div class="grid-item">
 

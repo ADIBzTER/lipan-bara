@@ -38,6 +38,7 @@ public class PurchaseDAO {
 				purchase.setDate(resultSet.getString("purc_date"));
 				purchase.setShipping(resultSet.getString("purc_shipping"));
 				purchase.setQuantity(resultSet.getInt("purc_quantity"));
+				purchase.setPrice(resultSet.getDouble("purc_price"));
 
 				// Customer
 				CustomerBean customer = purchase.getCustomer();
@@ -47,6 +48,16 @@ public class PurchaseDAO {
 				customer.setPassword(resultSet.getString("cust_password"));
 				customer.setAddress(resultSet.getString("cust_address"));
 				customer.setPhone(resultSet.getString("cust_phone"));
+
+				// Product
+				ProductBean product = purchase.getProduct();
+				product.setId(resultSet.getInt("prod_id"));
+				product.setName(resultSet.getString("prod_name"));
+				product.setQuantity(resultSet.getInt("prod_quantity"));
+				product.setPrice(resultSet.getDouble("prod_price"));
+				product.setDescription(resultSet.getString("prod_description"));
+				product.setImageLocation(resultSet.getString("prod_image_location"));
+				product.setSuppId(resultSet.getInt("supp_id"));
 
 				purchaseList.add(purchase);
 			}
@@ -109,6 +120,7 @@ public class PurchaseDAO {
 				purchase.setDate(resultSet.getString("purc_date"));
 				purchase.setShipping(resultSet.getString("purc_shipping"));
 				purchase.setQuantity(resultSet.getInt("purc_quantity"));
+				purchase.setPrice(resultSet.getDouble("purc_price"));
 
 				// Customer
 				CustomerBean customer = purchase.getCustomer();

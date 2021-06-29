@@ -25,14 +25,19 @@
 		<div id="sigin-signup" class="grid-element">
 
 			<c:choose>
-				<c:when test="${id != null}">
+				<c:when test="${loggedIn != null}">
 					<h3>${ username }
-						| <a href="cart">Cart</a> | <a href="logout">Logout</a>
+						|
+						<a href="cart">Cart</a>
+						|
+						<a href="logout">Logout</a>
 					</h3>
 				</c:when>
 				<c:otherwise>
 					<h3>
-						<a href="register">Sign Up</a> | <a href="login">Login</a>
+						<a href="register">Sign Up</a>
+						|
+						<a href="login">Login</a>
 					</h3>
 				</c:otherwise>
 			</c:choose>
@@ -47,17 +52,32 @@
 			<c:forEach items="${productList}" var="product">
 				<form class="product" action="cart" method="GET"
 					onsubmit="return false">
+
 					<input type="hidden" class="cart-activity" name="cartActivity"
-						value="addToCart"> <input type="hidden" class="product-id"
-						name="productId" value="${ product.id }"> <img
-						src="${product.imageLocation}" alt="product-image">
+						value="addToCart">
+
+					<input type="hidden" class="product-id" name="productId"
+						value="${ product.id }">
+
+					<img src="${product.imageLocation}" alt="product-image">
+
 					<div class="product-desc">
-						<span class="product-name">${product.name}</span> <span
-							class="product-description">${product.description} </span> <span
-							class="product-price">RM${CurrencyFormatter.format(product.price)}
-							| Available: ${ product.quantity }</span><span class="product-buttons">
+						<span class="product-name">${product.name}</span>
+						<span class="product-description">${product.description} </span>
+						<span class="product-price">RM${CurrencyFormatter.format(product.price)}
+							| Available: ${ product.quantity }</span>
+						<span class="product-buttons">
 							<button id="buy">Buy</button>
-							<button id="add-cart">Add to Cart</button>
+
+							<c:choose>
+								<c:when test="${loggedIn != null}">
+									<button id="add-cart">Add to Cart</button>
+								</c:when>
+								<c:otherwise>
+									<button onclick="location.href='login'">Add to Cart</button>
+								</c:otherwise>
+							</c:choose>
+
 						</span>
 					</div>
 				</form>

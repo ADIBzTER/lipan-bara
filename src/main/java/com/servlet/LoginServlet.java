@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (customer.isValid()) {
 				// Logged-in page
-				req.getSession().invalidate();
+				req.getSession(true).invalidate();
 				HttpSession session = req.getSession(true);
 
 				session.setAttribute("loggedIn", true);

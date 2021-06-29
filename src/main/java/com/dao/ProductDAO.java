@@ -90,7 +90,7 @@ public class ProductDAO {
 		PreparedStatement statement = null;
 
 		// Trace process
-		System.out.println("in ProductBean.getOne");
+		System.out.println("in ProductDAO.getOne");
 
 		try {
 			// Connect to DB
@@ -233,7 +233,7 @@ public class ProductDAO {
 			System.out.println("Product remove from database.");
 
 		} catch (Exception ex) {
-			System.out.println("Error in Product.DAO.deleteOne" + ex);
+			System.out.println("Error in ProductDAO.deleteOne" + ex);
 		}
 		// Some exception handling
 		finally {
@@ -293,7 +293,7 @@ public class ProductDAO {
 			System.out.println("Product updated.");
 
 		} catch (Exception ex) {
-			System.out.println("Error in Product.DAO.deleteOne" + ex);
+			System.out.println("Error in ProductDAO.updateOne" + ex);
 		}
 		// Some exception handling
 		finally {

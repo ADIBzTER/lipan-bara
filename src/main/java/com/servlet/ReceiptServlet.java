@@ -18,7 +18,7 @@ public class ReceiptServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// User not logged in
-		Object loggedIn = req.getSession(false).getAttribute("loggedIn");
+		Object loggedIn = req.getSession(true).getAttribute("loggedIn");
 		if (loggedIn == null) {
 			res.sendRedirect("login");
 			return;
@@ -42,7 +42,7 @@ public class ReceiptServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// User not logged in
-		Object loggedIn = req.getSession(false).getAttribute("loggedIn");
+		Object loggedIn = req.getSession(true).getAttribute("loggedIn");
 		if (loggedIn == null) {
 			res.sendRedirect("login");
 			return;

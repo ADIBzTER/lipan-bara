@@ -26,7 +26,7 @@ public class CartServlet extends HttpServlet {
 		}
 
 		try {
-			int userId = (int) req.getSession(false).getAttribute("id");
+			int userId = (int) req.getSession(true).getAttribute("id");
 
 			req.setAttribute("cartList", CartDAO.getUserCart(userId));
 
@@ -55,7 +55,7 @@ public class CartServlet extends HttpServlet {
 
 			switch (cartActivity) {
 			case "addToCart":
-				int customerId = (int) req.getSession().getAttribute("id");
+				int customerId = (int) req.getSession(true).getAttribute("id");
 				int productId = Integer.parseInt(req.getParameter("productId"));
 
 				CartBean cart = new CartBean();

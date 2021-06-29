@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.config.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,38 +37,43 @@
 	<div id="center">
 		<div class="suppliers-table">
 
-			<h2>Suppliers</h2>
-			<a href="supplier?addSupplier=true">
-				<button>Add Supplier</button>
-			</a>
+			<h2>Sales Report</h2>
 			<table>
 				<tr>
-					<th>Supplier Id</th>
-					<th>Supplier Name</th>
-					<th>Address</th>
-					<th>Phone</th>
-					<th>Update</th>
-					<th>Delete</th>
+					<th>Purchase Id</th>
+					<th>Date</th>
+					<th>Shipping</th>
+					<th>Quantity</th>
+					<th>Customer Name</th>
+					<th>Product Name</th>
+					<th>Price(RM)</th>
 				</tr>
 
-				<%-- Loop all suppliers here --%>
-				<c:forEach items="${supplierList}" var="supplier">
+				<c:set var="totalSales" value="0.0" />
+
+				<%-- Loop all purchases here --%>
+				<c:forEach items="${purchaseList}" var="purchase">
 					<tr>
-						<td>${ supplier.id }</td>
-						<td>${ supplier.name }</td>
-						<td>${ supplier.address }</td>
-						<td>${ supplier.phone }</td>
-						<td>
-							<a
-								href="supplier?updateSupplier=true&supplierId=${ supplier.id }">
-								<button id="${ supplier.id }" class="update-button">Update</button>
-							</a>
-						</td>
-						<td>
-							<button id="${ supplier.id }" class="delete-button">Delete</button>
-						</td>
+						<td>${ purchase.id }</td>
+						<td>${ purchase.date }</td>
+						<td>${ purchase.shipping }</td>
+						<td>${ purchase.quantity }</td>
+						<td>${ purchase.customer.name }</td>
+						<td>${ purchase.product.name }</td>
+						<td>${ CurrencyFormatter.format(purchase.price) }</td>
 					</tr>
+
+					<c:set var="totalSales" value="${ totalSales + purchase.price }" />
+
 				</c:forEach>
+				<tr>
+					<td colspan="6">
+						<b>Total Sales</b>
+					</td>
+					<td>
+						<b>${ CurrencyFormatter.format(totalSales) }</b>
+					</td>
+				</tr>
 
 			</table>
 
@@ -80,15 +86,14 @@
 				<a href="product">
 					<button>Product</button>
 				</a>
-				<button style="background-color: #a8dadc;">Supplier</button>
-				<a href="purchase">
-					<button>Sales</button>
+				<a href="supplier">
+					<button>Supplier</button>
 				</a>
+				<button style="background-color: #a8dadc;">Sales</button>
 			</div>
 		</div>
 	</div>
 
-	<script src="./static/scripts/supplier.js"></script>
 </body>
 
 </html>

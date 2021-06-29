@@ -20,9 +20,7 @@
 
 		<div id="appbar-left">
 			<div id="mainlogo">
-				<h1>
-					<a href="home">Lipan Bara</a> | Admin Dashboard
-				</h1>
+				<h1>Lipan Bara | Admin Dashboard</h1>
 			</div>
 		</div>
 
@@ -59,16 +57,22 @@
 				<c:forEach items="${productList}" var="product">
 					<tr>
 						<td>${ product.id }</td>
-						<td><img class="product-image"
-							src="${ product.imageLocation }" alt="product-image"></td>
+						<td>
+							<img class="product-image" src="${ product.imageLocation }"
+								alt="product-image">
+						</td>
 						<td>${ product.name }</td>
 						<td>${ CurrencyFormatter.format(product.price) }</td>
 						<td>${ product.quantity }</td>
 						<td>${ product.supplier.name}</td>
-						<td><a
-							href="product?updateProduct=true&productId=${ product.id }"><button
-									id="${ product.id }" class="update-button">Update</button></a></td>
-						<td><button id="${ product.id }" class="delete-button">Delete</button></td>
+						<td>
+							<a href="product?updateProduct=true&productId=${ product.id }">
+								<button id="${ product.id }" class="update-button">Update</button>
+							</a>
+						</td>
+						<td>
+							<button id="${ product.id }" class="delete-button">Delete</button>
+						</td>
 					</tr>
 				</c:forEach>
 
@@ -83,6 +87,9 @@
 				<button style="background-color: #a8dadc;">Product</button>
 				<a href="supplier">
 					<button>Supplier</button>
+				</a>
+				<a href="purchase">
+					<button>Sales</button>
 				</a>
 			</div>
 		</div>

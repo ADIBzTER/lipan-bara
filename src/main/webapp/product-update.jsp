@@ -20,9 +20,7 @@
 
 		<div id="appbar-left">
 			<div id="main-logo">
-				<h1>
-					<a href="home">Lipan Bara</a> | Admin Dashboard
-				</h1>
+				<h1>Lipan Bara | Admin Dashboard</h1>
 			</div>
 		</div>
 
@@ -49,8 +47,8 @@
 			</c:choose>
 
 			<form action="product" method="POST" enctype="multipart/form-data">
-				<input type="hidden" name="id" value="${ product.id }"> <input
-					type="hidden" name="imageLocation"
+				<input type="hidden" name="id" value="${ product.id }">
+				<input type="hidden" name="imageLocation"
 					value="${ product.imageLocation }">
 
 				<c:choose>
@@ -63,32 +61,39 @@
 				</c:choose>
 
 				<div class="input-class">
-					<label for="name">Name </label> <br> <input name="name"
-						id="name" type="text" autocomplete="off" required
-						value="${product.name }"> <br>
+					<label for="name">Name </label>
+					<br>
+					<input name="name" id="name" type="text" autocomplete="off"
+						required value="${product.name }">
+					<br>
 				</div>
 
 				<div class="input-class">
-					<label for="quantity">Quantity </label> <br> <input
-						name="quantity" id="quantity" type="number" min="1"
+					<label for="quantity">Quantity </label>
+					<br>
+					<input name="quantity" id="quantity" type="number" min="1"
 						autocomplete="off" required value="${ product.quantity }">
 					<br>
 				</div>
 
 				<div class="input-class">
-					<label for="price">Price(RM) </label> <br> <input name="price"
-						id="price" type="number" min="1" autocomplete="off" required
-						value="${ product.price }"> <br>
+					<label for="price">Price(RM) </label>
+					<br>
+					<input name="price" id="price" type="number" min="1" step="0.01"
+						autocomplete="off" required value="${ product.price }">
+					<br>
 				</div>
 
 				<div class="input-class">
-					<label for="description">Description </label> <br>
+					<label for="description">Description </label>
+					<br>
 					<textarea name="description" id="description" required>${ product.description }</textarea>
 					<br>
 				</div>
 
 				<div class="input-class">
-					<label for="image">Upload Product Image</label> <br>
+					<label for="image">Upload Product Image</label>
+					<br>
 
 					<c:choose>
 						<c:when test="${param[\"addProduct\"] != null}">
@@ -105,8 +110,9 @@
 				</div>
 
 				<div class="input-class">
-					<label for="supplier">Choose Supplier</label> <br> <select
-						name="supplierId" id="supplier">
+					<label for="supplier">Choose Supplier</label>
+					<br>
+					<select name="supplierId" id="supplier">
 
 						<%-- Loop all suppliers here --%>
 						<c:forEach items="${supplierList}" var="supplier">
@@ -123,6 +129,7 @@
 					</select>
 
 				</div>
+				<input type="submit" id="hidden-submit" hidden="true">
 			</form>
 
 		</div>
@@ -131,6 +138,7 @@
 	<div class="navbar">
 		<div class="navbar-flex">
 			<div class="navbar-grid">
+
 				<c:choose>
 					<c:when test="${param[\"addProduct\"] != null}">
 						<button id="submit">Add</button>
@@ -139,6 +147,7 @@
 						<button id="submit">Update</button>
 					</c:otherwise>
 				</c:choose>
+
 				<a href="product">
 					<button style="background-color: #ff5a5f; color: white;">Cancel</button>
 				</a>
@@ -147,9 +156,9 @@
 	</div>
 
 	<script>
-	const addButton = document.querySelector('#submit');
-	addButton.onclick = (e) => {
-		document.querySelector('form').submit();
+	const submitButton = document.querySelector('#submit');
+	submitButton.onclick = (e) => {
+		document.querySelector('#hidden-submit').click();
 	}
 </script>
 </body>
