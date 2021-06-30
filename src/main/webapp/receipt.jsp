@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.config.*"%>
+<%@ page import="java.util.Date"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +20,7 @@
 		<div id="appbar-left">
 			<div id="main-logo">
 				<h1>
-					<a href="home"><a href="home">Lipan Bara</a> | Resit
+					<a href="home">Lipan Bara</a> | Resit
 				</h1>
 			</div>
 		</div>
@@ -35,7 +37,8 @@
 
 	<div id="center">
 		<div class="resit">
-			<div class="resit-top">Order Resit #898</div>
+			<div class="resit-top">
+				Order Resit #<%=(new Date()).getTime()%></div>
 			<table id="user-details">
 				<tr>
 					<th>Name</th>
@@ -45,30 +48,42 @@
 				</tr>
 
 				<tr>
-					<td>Saiful Samsul</td>
-					<td>+60 11-222 3333</td>
-					<td>No 99, Jalan Mahsuri 3, Taman Mahsuri, 79999, Nilai,
-						Negeri Selangor</td>
-					<td>JnT</td>
+					<td>${ name }</td>
+					<td>${phone }</td>
+					<td>${ address }</td>
+					<td>Lipan Express</td>
 				</tr>
 			</table>
+
+			<br>
 
 			<table id="order-details">
 				<tr>
 					<th>Name</th>
-					<th>Price(RM)</th>
 					<th>Quantity</th>
+					<th>Price(RM)</th>
+
 				</tr>
 
-				<br>
+				<c:set var="totalPrice" value="0.0" />
+
+				<c:forEach items="${purchaseList}" var="purchase">
+					<tr>
+						<td>${ purchase.product.name }</td>
+						<td>${ purchase.quantity }</td>
+						<td>${ CurrencyFormatter.format(purchase.product.price) }</td>
+					</tr>
+
+					<c:set var="totalPrice" value="${ totalPrice + purchase.price }" />
+				</c:forEach>
 
 				<tr>
-					<td>[144hz] Xiaomi Curved Gaming Monitor Mi Surface</td>
-					<td>1,649.00</td>
-					<td>1</td>
+					<td colspan="2"><b>Total Price</b></td>
+					<td><b>${ CurrencyFormatter.format(totalPrice) }</b></td>
 				</tr>
 			</table>
-
+			<br>
+			<button onclick="location.href = 'home';">Go To Home</button>
 		</div>
 	</div>
 

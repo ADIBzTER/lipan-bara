@@ -20,7 +20,7 @@
 	<div class="grid">
 		<div id="title">
 			<h2>Lipan Bara Tech</h2>
-			<h5>Buy full set gaming PC with the lowest price</h5>
+			<h5>Build your custom PC with our accessories</h5>
 		</div>
 		<div id="outer">
 			<div id="inner">

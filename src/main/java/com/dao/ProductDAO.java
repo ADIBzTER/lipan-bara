@@ -281,7 +281,7 @@ public class ProductDAO {
 			// Prepared statement
 			statement = connection.prepareStatement(sql);
 
-			statement.setString(1, product.getName());
+			statement.setString(1,product.getName());
 			statement.setInt(2, product.getQuantity());
 			statement.setDouble(3, product.getPrice());
 			statement.setString(4, product.getDescription());

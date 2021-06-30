@@ -28,7 +28,7 @@
 			<h3>${ username }</h3>
 			|
 			<div id="logout">
-				<a href="adminLogin">Logout</a>
+				<a href="logout">Logout</a>
 			</div>
 		</div>
 

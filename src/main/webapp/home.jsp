@@ -27,17 +27,12 @@
 			<c:choose>
 				<c:when test="${loggedIn != null}">
 					<h3>${ username }
-						|
-						<a href="cart">Cart</a>
-						|
-						<a href="logout">Logout</a>
+						| <a href="cart">Cart</a> | <a href="logout">Logout</a>
 					</h3>
 				</c:when>
 				<c:otherwise>
 					<h3>
-						<a href="register">Sign Up</a>
-						|
-						<a href="login">Login</a>
+						<a href="register">Sign Up</a> | <a href="login">Login</a>
 					</h3>
 				</c:otherwise>
 			</c:choose>
@@ -54,12 +49,9 @@
 					onsubmit="return false">
 
 					<input type="hidden" class="cart-activity" name="cartActivity"
-						value="addToCart">
-
-					<input type="hidden" class="product-id" name="productId"
-						value="${ product.id }">
-
-					<img src="${product.imageLocation}" alt="product-image">
+						value="addToCart"> <input type="hidden" class="product-id"
+						name="productId" value="${ product.id }"> <img
+						src="${product.imageLocation}" alt="product-image">
 
 					<div class="product-desc">
 						<span class="product-name">${product.name}</span>

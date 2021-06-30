@@ -20,9 +20,9 @@ a {
   text-decoration: none;
   font-weight: bold;
 
-	&:hover {
-		color: black;
-	}
+  &:hover {
+    color: black;
+  }
 }
 
 #app-bar {
@@ -95,5 +95,18 @@ a {
         padding: 10px;
       }
     }
+  }
+}
+
+button {
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $secondary-color;
+    cursor: pointer;
+    transition: 0.2s;
   }
 }

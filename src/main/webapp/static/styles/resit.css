@@ -108,4 +108,18 @@ a:hover {
   border: 1px solid black;
   padding: 10px;
 }
+
+button {
+  border-radius: 5px;
+  height: 40px;
+  width: 120px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #a8dadc;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
 /*# sourceMappingURL=resit.css.map */

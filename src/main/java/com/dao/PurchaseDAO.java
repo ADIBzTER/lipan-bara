@@ -169,4 +169,62 @@ public class PurchaseDAO {
 		}
 		return purchase;
 	}
+	
+	// add  one purchase
+	public static  void  addOne(PurchaseBean purchase) {
+		
+		// Preparing some objects/variable
+		String sql = "INSERT INTO purchases (purc_date, purc_shipping, purc_quantity, purc_price,cust_id,prod_id)"
+						+ "VALUES (?, ?, ?, ?, ?, ?)";
+
+		PreparedStatement statement = null;
+		  
+		// Trace process
+		System.out.println("In PurchaseDAO.addOne");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+			statement = connection.prepareStatement(sql);
+			
+			
+			
+			statement.setString(1, purchase.getDate());
+			statement.setString(2, purchase.getShipping());
+			statement.setInt(3, purchase.getQuantity());
+			statement.setDouble(4, purchase.getPrice());
+			statement.setInt(5, purchase.getCustId());
+			statement.setInt(6, purchase.getProdId());
+
+			statement.executeUpdate();
+			System.out.println("New Purchase added to database.");
+			
+		} catch (Exception ex) {
+			System.out.println("Error in PurchaseDAO.addOne " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+	}
 }

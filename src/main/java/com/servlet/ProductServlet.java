@@ -76,7 +76,7 @@ public class ProductServlet extends HttpServlet {
 
 		try {
 			String productActivity = req.getParameter("productActivity");
-			String uploadPath = "C:\\Users\\Adib Zaini\\Desktop\\CS230 PART 4\\CSC584 - Enterprise Programming\\Project\\LipanBara\\src\\main\\webapp\\images\\";
+			String uploadPath = "C:\\Users\\ASUS\\eclipse-workspace\\LipanBara\\src\\main\\webapp\\images\\";
 
 			String fileName;
 			ProductBean product;

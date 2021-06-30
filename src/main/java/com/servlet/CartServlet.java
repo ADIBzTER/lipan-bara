@@ -65,7 +65,7 @@ public class CartServlet extends HttpServlet {
 				// Insert product to cart
 				CartDAO.addToCart(cart);
 
-//				res.sendRedirect("cart");
+//				res.setStatus(HttpServletResponse.SC_NO_CONTENT);
 				break;
 
 			case "removeFromCart":

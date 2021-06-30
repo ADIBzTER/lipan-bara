@@ -19,8 +19,7 @@
 		<div id="appbar-left">
 			<div id="main-logo">
 				<h1>
-					<a href="home">Lipan Bara</a>
-					| Cart
+					<a href="home">Lipan Bara</a> | Cart
 				</h1>
 			</div>
 		</div>
@@ -40,27 +39,25 @@
 
 			<c:set var="totalPrice" value="0.0" />
 
+
 			<%-- Loop all products in cart here --%>
 			<c:forEach items="${cartList}" var="cart">
 				<form class="product" action="cart" method="POST">
 					<input type="hidden" name="cartActivity" value="removeFromCart">
-					<input type="hidden" name="cartId" value="${ cart.id }">
-
-					<img src="${ cart.product.imageLocation }" alt="product-image">
+					<input type="hidden" name="cartId" value="${ cart.id }"> <img
+						src="${ cart.product.imageLocation }" alt="product-image">
 
 					<div class="product-desc">
-						<span class="product-name">${ cart.product.name }</span>
-						<span class="product-description">${ cart.product.description }
-						</span>
-						<span class="product-price">RM${ CurrencyFormatter.format(cart.product.price) }</span>
+						<span class="product-name">${ cart.product.name }</span> <span
+							class="product-description">${ cart.product.description }
+						</span> <span class="product-price">RM${ CurrencyFormatter.format(cart.product.price) }</span>
 						<span class="product-buttons">
 							<button>Remove From Cart</button>
 						</span>
 					</div>
 				</form>
 
-				<c:set var="totalPrice"
-					value="${ totalPrice + cart.product.price }" />
+				<c:set var="totalPrice" value="${ totalPrice + cart.product.price }" />
 
 			</c:forEach>
 
@@ -69,26 +66,27 @@
 
 	<div id="cart-footer">
 		<div class="grid-item">
-			Name: ${ name }
-			<br>
-			Phone: ${ phone }
-			<br>
-			Address: ${ address }
-			<br>
-			Shipping Method: Lipan Express
-			<br>
-			Total: RM${ CurrencyFormatter.format(totalPrice) }
+			Name: ${ name } <br> Phone: ${ phone } <br> Address: ${ address }
+			<br> Shipping Method: Lipan Express <br> Total: RM${ CurrencyFormatter.format(totalPrice) }
 		</div>
 		<div class="grid-item">
 
 			<%-- Check if there is item in cart --%>
 			<c:choose>
 				<c:when test="${cartList.size() != 0}">
-					<div class="pay-div">
-						<a href="receipt">
-							<button>Pay</button>
-						</a>
-					</div>
+					<form action="purchase" method="POST">
+
+						<c:forEach items="${cartList}" var="cart">
+							<input type="hidden" name="cartId" value="${ cart.id }">
+						</c:forEach>
+
+						<input type="hidden" name="userId" value="${ id }">
+						<div class="pay-div">
+			
+						<button>Pay</button>
+							
+						</div>
+					</form>
 				</c:when>
 				<c:otherwise>
 					<%-- NOTHING --%>

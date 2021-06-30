@@ -20,7 +20,7 @@ public class CartDAO {
 		PreparedStatement statement = null;
 
 		// Trace process
-		System.out.println("in CartDAO.getCart");
+		System.out.println("in CartDAO.getUserCart");
 
 		try {
 			// Connect to DB
@@ -115,7 +115,7 @@ public class CartDAO {
 			statement.setInt(2, prodId);
 
 			statement.executeUpdate();
-			System.out.println("Product added to database.");
+			System.out.println("Product added to cart.");
 
 		} catch (Exception ex) {
 			System.out.println("Error in CartDAO.addToCart " + ex);

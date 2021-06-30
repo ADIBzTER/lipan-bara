@@ -214,4 +214,66 @@ public class CustomerDAO {
 		}
 		return isAvailable;
 	}
+
+	// Get only one purchase
+	public static CustomerBean getOne( int custId) {
+
+		// Preparing some objects/variable
+		CustomerBean customer = new CustomerBean();
+		String sql = "SELECT * from customers WHERE cust_id=?;";
+
+		PreparedStatement statement = null;
+
+		// Trace process
+		System.out.println("In CustomerDAO.getOne");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, custId);
+
+			resultSet = statement.executeQuery();
+
+			// Iterate over the ResultSet, add row into object and object into list
+			while (resultSet.next()) {
+				
+				// Customer
+				customer.setId(resultSet.getInt("cust_id"));
+				customer.setName(resultSet.getString("cust_name"));
+				customer.setUsername(resultSet.getString("cust_username"));
+				customer.setAddress(resultSet.getString("cust_address"));
+				customer.setPhone(resultSet.getString("cust_phone"));
+
+			}
+		} catch (Exception ex) {
+			System.out.println("Error in PurchaseDAO.getOne " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return customer;
+	}
 }
