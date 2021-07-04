@@ -35,7 +35,7 @@ public class PurchaseDAO {
 				// Purchase
 				PurchaseBean purchase = new PurchaseBean();
 				purchase.setId(resultSet.getInt("purc_id"));
-				purchase.setDate(resultSet.getString("purc_date"));
+				purchase.setDate(resultSet.getDate("purc_date").toString());
 				purchase.setShipping(resultSet.getString("purc_shipping"));
 				purchase.setQuantity(resultSet.getInt("purc_quantity"));
 				purchase.setPrice(resultSet.getDouble("purc_price"));
@@ -91,6 +91,65 @@ public class PurchaseDAO {
 		return purchaseList;
 	}
 
+	// Get all purchases by month
+	public static List<PurchaseBean> getAllByMonth() {
+
+		List<PurchaseBean> purchaseList = new LinkedList<>();
+		String sql = "SELECT DATE_FORMAT(purc_date, '%M %Y') AS month, SUM(purc_price) AS sum "
+				+ "FROM purchases GROUP BY month;";
+		Statement statement = null;
+
+		// Trace process
+		System.out.println("in PurchaseDAO.getAll");
+
+		try {
+			// Connect to DB
+			connection = ConnectionManager.getConnection();
+
+			statement = connection.createStatement();
+
+			resultSet = statement.executeQuery(sql);
+
+			// Iterate over the ResultSet, add row into object and object into list
+			while (resultSet.next()) {
+
+				// Purchase
+				PurchaseBean purchase = new PurchaseBean();
+				purchase.setDate(resultSet.getString("month"));
+				purchase.setPrice(resultSet.getDouble("sum"));
+
+				purchaseList.add(purchase);
+			}
+		} catch (Exception ex) {
+			System.out.println("Error in PurchaseDAO.getAllByMonth: " + ex);
+		}
+		// Some exception handling
+		finally {
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (Exception e) {
+				}
+				resultSet = null;
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (Exception e) {
+				}
+				statement = null;
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (Exception e) {
+				}
+				connection = null;
+			}
+		}
+		return purchaseList;
+	}
+
 	// Get only one purchase
 	public static PurchaseBean getOne(int purchaseId) {
 
@@ -117,7 +176,7 @@ public class PurchaseDAO {
 
 				// Product
 				purchase.setId(resultSet.getInt("purc_id"));
-				purchase.setDate(resultSet.getString("purc_date"));
+				purchase.setDate(resultSet.getDate("purc_date").toString());
 				purchase.setShipping(resultSet.getString("purc_shipping"));
 				purchase.setQuantity(resultSet.getInt("purc_quantity"));
 				purchase.setPrice(resultSet.getDouble("purc_price"));
@@ -169,16 +228,16 @@ public class PurchaseDAO {
 		}
 		return purchase;
 	}
-	
-	// add  one purchase
-	public static  void  addOne(PurchaseBean purchase) {
-		
+
+	// add one purchase
+	public static void addOne(PurchaseBean purchase) {
+
 		// Preparing some objects/variable
 		String sql = "INSERT INTO purchases (purc_date, purc_shipping, purc_quantity, purc_price,cust_id,prod_id)"
-						+ "VALUES (?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement statement = null;
-		  
+
 		// Trace process
 		System.out.println("In PurchaseDAO.addOne");
 
@@ -186,9 +245,7 @@ public class PurchaseDAO {
 			// Connect to DB
 			connection = ConnectionManager.getConnection();
 			statement = connection.prepareStatement(sql);
-			
-			
-			
+
 			statement.setString(1, purchase.getDate());
 			statement.setString(2, purchase.getShipping());
 			statement.setInt(3, purchase.getQuantity());
@@ -198,7 +255,7 @@ public class PurchaseDAO {
 
 			statement.executeUpdate();
 			System.out.println("New Purchase added to database.");
-			
+
 		} catch (Exception ex) {
 			System.out.println("Error in PurchaseDAO.addOne " + ex);
 		}

@@ -18,12 +18,12 @@ searchBar.oninput = (e) => {
 
 const addCartButtons = document.querySelectorAll('#add-cart');
 addCartButtons.forEach((button) => {
-  button.onclick = (e) => {
+  button.onclick = async (e) => {
     const form = button.closest('form');
     const cartActivity = form.querySelector('.cart-activity').value;
     const productId = form.querySelector('.product-id').value;
 
-    addToCart(cartActivity, productId);
+    await addToCart(cartActivity, productId);
 
     alert('Product added to cart');
   };
@@ -31,12 +31,12 @@ addCartButtons.forEach((button) => {
 
 const buyButtons = document.querySelectorAll('#buy');
 buyButtons.forEach((button) => {
-  button.onclick = (e) => {
+  button.onclick = async (e) => {
     const form = button.closest('form');
     const cartActivity = form.querySelector('.cart-activity').value;
     const productId = form.querySelector('.product-id').value;
 
-    addToCart(cartActivity, productId);
+    await addToCart(cartActivity, productId);
     location.href = 'cart';
   };
 });

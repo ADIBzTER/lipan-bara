@@ -39,7 +39,6 @@
 
 			<c:set var="totalPrice" value="0.0" />
 
-
 			<%-- Loop all products in cart here --%>
 			<c:forEach items="${cartList}" var="cart">
 				<form class="product" action="cart" method="POST">

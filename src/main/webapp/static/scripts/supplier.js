@@ -2,7 +2,7 @@
 const deleteButtons = document.querySelectorAll('.delete-button');
 deleteButtons.forEach((button) => {
   button.onclick = (e) => {
-    const string = `Are you sure want to delete supplier with Supplier ID = ${button.id}`;
+    const string = `Are you sure want to delete ${button.dataset.supplierName}`;
     if (confirm(string)) {
       fetch('supplier', {
         method: 'POST',

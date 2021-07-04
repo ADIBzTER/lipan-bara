@@ -43,7 +43,7 @@
 			</a>
 			<table>
 				<tr>
-					<th>Product Id</th>
+					<th></th>
 					<th>Product Image</th>
 					<th>Product Name</th>
 					<th>Price(RM)</th>
@@ -53,25 +53,26 @@
 					<th>Delete</th>
 				</tr>
 
+				<c:set var="counter" value="0" />
 				<%-- Loop all products here --%>
 				<c:forEach items="${productList}" var="product">
+					<c:set var="counter" value="${ counter + 1}" />
+
 					<tr>
-						<td>${ product.id }</td>
-						<td>
-							<img class="product-image" src="${ product.imageLocation }"
-								alt="product-image">
-						</td>
+						<td>${ counter }</td>
+						<td><img class="product-image"
+							src="${ product.imageLocation }" alt="product-image"></td>
 						<td>${ product.name }</td>
 						<td>${ CurrencyFormatter.format(product.price) }</td>
 						<td>${ product.quantity }</td>
 						<td>${ product.supplier.name}</td>
-						<td>
-							<a href="product?updateProduct=true&productId=${ product.id }">
+						<td><a
+							href="product?updateProduct=true&productId=${ product.id }">
 								<button id="${ product.id }" class="update-button">Update</button>
-							</a>
-						</td>
+						</a></td>
 						<td>
-							<button id="${ product.id }" class="delete-button">Delete</button>
+							<button id="${ product.id }" class="delete-button"
+								data-product-name="${ product.name }">Delete</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -87,8 +88,7 @@
 				<button style="background-color: #a8dadc;">Product</button>
 				<a href="supplier">
 					<button>Supplier</button>
-				</a>
-				<a href="purchase">
+				</a> <a href="purchase">
 					<button>Sales</button>
 				</a>
 			</div>

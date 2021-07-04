@@ -1,8 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import com.bean.*;
 import com.dao.*;
@@ -51,7 +48,7 @@ public class PurchaseServlet extends HttpServlet {
 		// DISPLAY
 		else {
 			try {
-				req.setAttribute("purchaseList", PurchaseDAO.getAll());
+				req.setAttribute("purchaseList", PurchaseDAO.getAllByMonth());
 
 				RequestDispatcher rd = req.getRequestDispatcher("purchase.jsp");
 				rd.forward(req, res);
@@ -79,36 +76,33 @@ public class PurchaseServlet extends HttpServlet {
 
 			List<CartBean> cartList = CartDAO.getUserCart(Integer.parseInt(req.getParameter("userId")));
 
-			SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy");
-			Date date = new Date(System.currentTimeMillis());
-			
 			List<PurchaseBean> purchaseList = new LinkedList<>();
-			
+
 			for (CartBean cart : cartList) {
 				PurchaseBean purchase = new PurchaseBean();
-				
-				purchase.setDate(format.format(date).toString());
+
+				purchase.setDate((new Date()).toString());
 				purchase.setShipping("Lipan Express");
 				purchase.setQuantity(1);
 				purchase.setPrice(cart.getProduct().getPrice());
 				purchase.setCustId(cart.getCustId());
 				purchase.setProdId(cart.getProdId());
-				
+
 				CustomerBean customer = CustomerDAO.getOne(cart.getCustId());
 				purchase.setCustomer(customer);
-				
+
 				PurchaseDAO.addOne(purchase);
-				
+
 				ProductBean product = ProductDAO.getOne(cart.getProdId());
 				product.setQuantity(product.getQuantity() - 1);
 				ProductDAO.updateOne(product);
 				purchase.setProduct(product);
-				
+
 				CartDAO.removeFromCart(cart.getId());
-				
-				purchaseList.add(purchase);	
+
+				purchaseList.add(purchase);
 			}
-			
+
 			req.setAttribute("purchaseList", purchaseList);
 			RequestDispatcher rd = req.getRequestDispatcher("receipt");
 			rd.forward(req, res);

@@ -40,39 +40,28 @@
 			<h2>Sales Report</h2>
 			<table>
 				<tr>
-					<th>Purchase Id</th>
-					<th>Date</th>
-					<th>Shipping</th>
-					<th>Quantity</th>
-					<th>Customer Name</th>
-					<th>Product Name</th>
+					<th></th>
+					<th>Month</th>
 					<th>Price(RM)</th>
 				</tr>
 
+				<c:set var="counter" value="0" />
 				<c:set var="totalSales" value="0.0" />
 
 				<%-- Loop all purchases here --%>
 				<c:forEach items="${purchaseList}" var="purchase">
+					<c:set var="counter" value="${ counter + 1}" />
 					<tr>
-						<td>${ purchase.id }</td>
+						<td>${ counter }</td>
 						<td>${ purchase.date }</td>
-						<td>${ purchase.shipping }</td>
-						<td>${ purchase.quantity }</td>
-						<td>${ purchase.customer.name }</td>
-						<td>${ purchase.product.name }</td>
 						<td>${ CurrencyFormatter.format(purchase.price) }</td>
 					</tr>
-
 					<c:set var="totalSales" value="${ totalSales + purchase.price }" />
-
 				</c:forEach>
+
 				<tr>
-					<td colspan="6">
-						<b>Total Sales</b>
-					</td>
-					<td>
-						<b>${ CurrencyFormatter.format(totalSales) }</b>
-					</td>
+					<td colspan="2"><b>Total Sales</b></td>
+					<td><b>${ CurrencyFormatter.format(totalSales) }</b></td>
 				</tr>
 
 			</table>
@@ -85,8 +74,7 @@
 			<div class="navbar-grid">
 				<a href="product">
 					<button>Product</button>
-				</a>
-				<a href="supplier">
+				</a> <a href="supplier">
 					<button>Supplier</button>
 				</a>
 				<button style="background-color: #a8dadc;">Sales</button>

@@ -42,7 +42,7 @@
 			</a>
 			<table>
 				<tr>
-					<th>Supplier Id</th>
+					<th></th>
 					<th>Supplier Name</th>
 					<th>Address</th>
 					<th>Phone</th>
@@ -50,24 +50,28 @@
 					<th>Delete</th>
 				</tr>
 
+				<c:set var="counter" value="0" />
 				<%-- Loop all suppliers here --%>
 				<c:forEach items="${supplierList}" var="supplier">
+					<c:set var="counter" value="${ counter + 1}" />
+
 					<tr>
-						<td>${ supplier.id }</td>
+						<td>${ counter }</td>
 						<td>${ supplier.name }</td>
 						<td>${ supplier.address }</td>
 						<td>${ supplier.phone }</td>
-						<td>
-							<a
-								href="supplier?updateSupplier=true&supplierId=${ supplier.id }">
+						<td><a
+							href="supplier?updateSupplier=true&supplierId=${ supplier.id }">
 								<button id="${ supplier.id }" class="update-button">Update</button>
-							</a>
-						</td>
+						</a></td>
 						<td>
-							<button id="${ supplier.id }" class="delete-button">Delete</button>
+							<button id="${ supplier.id }" class="delete-button"
+								data-supplier-name="${ supplier.name }">Delete</button>
 						</td>
 					</tr>
 				</c:forEach>
+
+				<c:set var="totalPrice" value="${ totalPrice + cart.product.price }" />
 
 			</table>
 
