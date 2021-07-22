@@ -81,7 +81,7 @@ public class PurchaseServlet extends HttpServlet {
 			for (CartBean cart : cartList) {
 				PurchaseBean purchase = new PurchaseBean();
 
-				purchase.setDate((new Date()).toString());
+				purchase.setDate(java.time.LocalDate.now().toString());
 				purchase.setShipping("Lipan Express");
 				purchase.setQuantity(1);
 				purchase.setPrice(cart.getProduct().getPrice());
